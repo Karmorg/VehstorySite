@@ -1,15 +1,13 @@
 <template>
-  <div class="profile_page">
-    <img alt="Vue logo" src="../assets/logo.png">
+  <div class="Admin">
   </div>
+
 </template>
 
 <template>
 
   <div>
-<!--    <p> <input placeholder="Kliendi nr" v-model="vehicle.clientId">-->
-<!--      Ajutine väli, kuni sisse logimine ei tööta. </p>-->
-
+    <input placeholder="Kliendi nr" v-model="vehicle.clientId">
     <h1>Minu sõidukid</h1>
 
     <table border="1" align="center">
@@ -23,6 +21,7 @@
         <th>Aastakäik</th>
         <th>Kütus</th>
         <th>Mootori võimsus, kW</th>
+        <th>Aktiivne</th>
         <th>Läbisõit</th>
       </tr>
       <tr v-for="(row, index) in vehicleList">
@@ -35,9 +34,10 @@
         <td>{{row.year}}</td>
         <td>{{row.fuel}}</td>
         <td>{{row.kW}}</td>
+        <td>{{row.active}}</td>
         <td><input v-model="row.odo" ></td>
         <td><button v-on:click="updateOdo(index)" > Uuenda läbisõitu </button></td>
-        <td><button v-on:click="deleteRow(index)">Kustuta sõiduk</button></td>
+        <td><button v-on:click="deleteRow(index)">Kustuta sõiduk</button></td>>
       </tr>
       <tr>
         <td><input placeholder="reg. nr" v-model="vehicle.regNo"></td>
@@ -56,16 +56,13 @@
 
 <script>
 
-let getMyVehicles = function (clientId){
-  this.$http.get("http://localhost:8080/myVehicles?clientId=" + clientId)
+let getAllVehicles = function (){
+  this.$http.get("http://localhost:8080/allVehicles")
       .then(response => this.vehicleList = response.data);
 }
 
 let updateOdo = function (index){
   let url = "http://localhost:8080/updateOdo";
-  let config = {    //selle osa võib ka ära jätta
-    params: {}
-  }
   let body = {
     vehId: this.vehicleList[index].vehId,
     newOdo: this.vehicleList[index].odo
@@ -76,11 +73,12 @@ let updateOdo = function (index){
 }
 
 let deleteRow = function (index){
-  let url="http://localhost:8080/deleteVehicle" + "?id=" + this.vehicleList[index].vehId;
+  let url="http://localhost:8080/deleteVehicle?id=" + this.vehicleList[index].vehId;
   this.$http.put(url)
       .then(alert("Sõiduk kustutatud"))
       .then(this.vehicleList.splice(index, 1))
 }
+
 
 let addVehicle = function (){
   this.vehicle.active = true;
@@ -89,13 +87,9 @@ let addVehicle = function (){
       .then(this.getAllVehicles())
 }
 
-let randomFunction = function (){
-  getSelection()
-}
-
 export default {
   methods: {
-    getMyVehicles:getMyVehicles,
+    getAllVehicles:getAllVehicles,
     deleteRow:deleteRow,
     updateOdo:updateOdo,
     addVehicle:addVehicle
@@ -106,7 +100,7 @@ export default {
       vehicle: {}
     }
   },
-  created() {this.getMyVehicles(2)   //Selle created meetodi tõmbab Vue alati esimesena tööle
+  created() {this.getAllVehicles()   //Selle created meetodi tõmbab Vue alati esimesena tööle
   }
 }
 </script>

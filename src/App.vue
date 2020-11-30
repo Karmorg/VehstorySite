@@ -4,7 +4,8 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/register">Register</router-link> |
-      <router-link to="/Profilepage">Profile page</router-link>
+      <router-link to="/Profilepage">Profile page</router-link> |
+      <router-link to="/Admin">Admin</router-link>
     </div>
     <router-view/>
   </div>
