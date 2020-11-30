@@ -62,7 +62,7 @@ let kustutada=function (index){
 }
 
 let getData = function () {
-  let url="http://localhost:8080/VehicleServiceList?vehicleId=6";
+  let url="http://localhost:8080/VehicleServiceList?vehicleId=22";
 
   this.resultList = this.$http.get(url)
       .then(result => this.resultList=result.data)

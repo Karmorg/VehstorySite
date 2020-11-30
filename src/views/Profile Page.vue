@@ -7,8 +7,8 @@
 <template>
 
   <div>
-<!--    <p> <input placeholder="Kliendi nr" v-model="vehicle.clientId">-->
-<!--      Ajutine väli, kuni sisse logimine ei tööta. </p>-->
+    <p> <input placeholder="Kliendi nr" v-model="vehicle.clientId">
+      Ajutine väli sõiduki sisestamiseks, kuni sisse logimine ei tööta. </p>
 
     <h1>Minu sõidukid</h1>
 

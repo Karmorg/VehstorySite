@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Register from '../views/Register.vue'
 import profile_page from '../views/Profile Page'
 import Admin from "@/views/Admin";
+import TeenusteValimine from "@/views/TeenusteValimine";
 
 Vue.use(VueRouter)
 
@@ -40,6 +41,12 @@ const routes = [
     path: '/Admin',
     name: 'Admin',
     component: Admin
+
+  } ,
+  {
+    path: '/TeenusteValimine',
+    name: 'TeenusteValimine',
+    component: TeenusteValimine
 
   }
 ]
