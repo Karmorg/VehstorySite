@@ -8,12 +8,12 @@
 
   <div>
     <input placeholder="Kliendi nr" v-model="vehicle.clientId">
-    <h1>Minu sõidukid</h1>
+    <h1>Kõik sõidukid</h1>
 
     <table border="1" align="center">
       <tr>
-        <th hidden>Id</th>
-        <th hidden>VehId</th>
+        <th>Id</th>
+        <th>VehId</th>
         <th>Reg.no</th>
         <th>Tüüp</th>
         <th>Tootja</th>
@@ -21,12 +21,12 @@
         <th>Aastakäik</th>
         <th>Kütus</th>
         <th>Mootori võimsus, kW</th>
-        <th>Aktiivne</th>
         <th>Läbisõit</th>
+        <th>Aktiivne</th>
       </tr>
       <tr v-for="(row, index) in vehicleList">
-        <td hidden>{{index}}</td>
-        <td hidden>{{row.vehId}}</td>
+        <td>{{index}}</td>
+        <td>{{row.vehId}}</td>
         <td>{{row.regNo}}</td>
         <td>{{row.type}}</td>
         <td>{{row.manufactorer}}</td>
@@ -34,12 +34,14 @@
         <td>{{row.year}}</td>
         <td>{{row.fuel}}</td>
         <td>{{row.kW}}</td>
-        <td>{{row.active}}</td>
         <td><input v-model="row.odo" ></td>
+        <td>{{row.active}}</td>
         <td><button v-on:click="updateOdo(index)" > Uuenda läbisõitu </button></td>
-        <td><button v-on:click="deleteRow(index)">Kustuta sõiduk</button></td>>
+        <td><button v-on:click="deleteRow(index)">Kustuta sõiduk</button></td>
       </tr>
       <tr>
+        <td></td>
+        <td></td>
         <td><input placeholder="reg. nr" v-model="vehicle.regNo"></td>
         <td><input placeholder="tüüp" v-model="vehicle.type"></td>
         <td><input placeholder="tootja" v-model="vehicle.manufactorer"></td>
@@ -48,6 +50,7 @@
         <td><input placeholder="kütus" v-model="vehicle.fuel"></td>
         <td><input placeholder="kw" v-model="vehicle.kW"></td>
         <td><input placeholder="läbisõit" v-model="vehicle.odo"></td>
+        <td>{{vehicle.kW}}"</td>
         <td><button v-on:click="addVehicle()">Lisa sõiduk</button></td>
       </tr>
     </table>
