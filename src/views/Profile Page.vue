@@ -86,7 +86,7 @@ let addVehicle = function (){
   this.vehicle.active = true;
   let url ="http://localhost:8080/addVehicle"
   this.$http.post(url, this.vehicle)
-      .then(this.getAllVehicles())
+      .then(this.getMyVehicles(2))
 }
 
 let randomFunction = function (){
