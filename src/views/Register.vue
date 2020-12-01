@@ -59,7 +59,7 @@ let updateOdo = function (index){
   }
   let body = {
     vehId: this.vehicleList[index].vehId,
-    newOdo: this.vehicleList[index].odo
+    newOdoValue: this.vehicleList[index].odo
 
   }
   this.$http.put(url, body)
