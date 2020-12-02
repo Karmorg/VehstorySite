@@ -5,6 +5,7 @@ import Register from '../views/Register.vue'
 import profile_page from '../views/Profile Page'
 import Admin from "@/views/Admin";
 import TeenusteValimine from "@/views/TeenusteValimine";
+import Dashboard from "@/views/Dashboard";
 
 Vue.use(VueRouter)
 
@@ -47,6 +48,12 @@ const routes = [
     path: '/TeenusteValimine',
     name: 'TeenusteValimine',
     component: TeenusteValimine
+
+  },
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: Dashboard
 
   }
 ]

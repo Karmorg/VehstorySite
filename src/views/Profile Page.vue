@@ -37,6 +37,8 @@
         <td>{{row.kW}}</td>
         <td><input v-model="row.odo" ></td>
         <td><button v-on:click="updateOdo(index)" > Uuenda läbisõitu </button></td>
+        <td><button v-on:click="goToServices(row.vehId)" > Hoolduste valik </button></td>
+        <td><button v-on:click="goToDashboard(row.vehId)" > Töölauale </button></td>
         <td><button v-on:click="deleteRow(index)">Kustuta sõiduk</button></td>
       </tr>
       <tr>
@@ -68,11 +70,19 @@ let updateOdo = function (index){
   }
   let body = {
     vehId: this.vehicleList[index].vehId,
-    newOdo: this.vehicleList[index].odo
+    newOdoValue: this.vehicleList[index].odo
 
   }
   this.$http.put(url, body)
       .then(alert("uuendatud"))
+}
+
+let goToDashboard = function (vehicleId){
+  this.$router.push({ path: 'Dashboard', vehicle: { vehId: '7' } })
+}
+
+let goToServices = function (vehicleId){
+  this.$router.push({ path: 'TeenusteValimine', vehicle: { vehId: '7' } })
 }
 
 let deleteRow = function (index){
@@ -86,7 +96,9 @@ let addVehicle = function (){
   this.vehicle.active = true;
   let url ="http://localhost:8080/addVehicle"
   this.$http.post(url, this.vehicle)
-      .then(this.getMyVehicles(2))
+      .then(this.vehicleList.push(this.vehicle))
+      .then(alert("sõiduk lisatud"))
+      // .then(this.$router.push({ path: 'Profilepage' }))
 }
 
 let randomFunction = function (){
@@ -98,7 +110,9 @@ export default {
     getMyVehicles:getMyVehicles,
     deleteRow:deleteRow,
     updateOdo:updateOdo,
-    addVehicle:addVehicle
+    addVehicle:addVehicle,
+    goToDashboard:goToDashboard,
+    goToServices:goToServices
   },
   data: function (){      //Data on ka Vue enda sisene funtsioon
     return {
