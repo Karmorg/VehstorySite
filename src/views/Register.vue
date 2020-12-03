@@ -15,7 +15,7 @@
     </p>
     <br>
     <button v-on:click="createAccount()"> Registreeri </button>
-    <button> Login </button>
+    <button v-on:click="login()"> Login </button>
     <br>  <br>
     <br>
     <button v-on:click="addRow"> Lisa rida </button>
@@ -80,7 +80,13 @@ let createAccountFunction = function () {
   this.$http.post(url, this.client)
       // .then(this.showResponse)
       .then(alert("tehtud"))
-  // this.accountNo = "";
+}
+
+
+let loginFunction= function (){
+  let url = "http://localhost:8080/login";
+  this.$http.post(url, this.client)
+
 }
 
 let getAllVehicles = function (){
@@ -94,8 +100,9 @@ export default {
     getAllVehicles:getAllVehicles,
     addRow:addRow,
     deleteRow:deleteRow,
-    updateOdo:updateOdo
-    // showResponse: showResponse
+    updateOdo:updateOdo,
+    login:loginFunction,
+    //showesponse:showresponse
   },
   data: function (){      //Data on ka Vue enda sisene funtsioon
     return {
@@ -106,13 +113,5 @@ export default {
   created() {this.getAllVehicles()    //Selle created meetodi tõmbab Vue alati esimesena tööle
   }
 }
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
-//
-// export default {
-//   name: 'Home',
-//   components: {
-//     HelloWorld
-//   }
-// }
+
 </script>
