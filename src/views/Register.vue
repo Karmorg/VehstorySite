@@ -11,10 +11,11 @@
     <p>
       <input placeholder="Sisesta nimi" v-model="client.name">
       <input placeholder="Sisesta email" v-model="client.eMail">
+      <input placeholder="Sisesta parool" v-model="client.password">
     </p>
     <br>
     <button v-on:click="createAccount()"> Registreeri </button>
-    <button> Login </button>
+    <button v-on:click="login()"> Login </button>
     <br>  <br>
     <br>
     <button v-on:click="addRow"> Lisa rida </button>
@@ -78,8 +79,16 @@ let createAccountFunction = function () {
   }
   this.$http.post(url, this.client)
       // .then(this.showResponse)
-      .then(alert("tehtud"))
+      .then(alert("Oled registreeritud"))
   // this.accountNo = "";
+}
+
+let login = function (){
+  let url = "http://localhost:8080/login"
+  this.$http.post(url, this.client)
+      // .then(response => this.reply = response.data)
+      // .then(alert(this.reply));
+      .then(alert("Sisse logitud"))
 }
 
 let getAllVehicles = function (){
@@ -93,14 +102,15 @@ export default {
     getAllVehicles:getAllVehicles,
     addRow:addRow,
     deleteRow:deleteRow,
-    updateOdo:updateOdo
+    updateOdo:updateOdo,
+    login:login
     // showResponse: showResponse
   },
   data: function (){      //Data on ka Vue enda sisene funtsioon
     return {
       vehicleList: [],
-      client: {}
-    }
+      client: {},
+      reply: {}    }
   },
   created() {this.getAllVehicles()    //Selle created meetodi tõmbab Vue alati esimesena tööle
   }

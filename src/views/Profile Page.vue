@@ -78,11 +78,11 @@ let updateOdo = function (index){
 }
 
 let goToDashboard = function (vehicleId){
-  this.$router.push({ path: 'Dashboard', vehicle: { vehId: '7' } })
+  this.$router.push({ path: 'Dashboard', params: { vehId: vehicleId } })
 }
 
 let goToServices = function (vehicleId){
-  this.$router.push({ path: 'TeenusteValimine', vehicle: { vehId: '7' } })
+  this.$router.push({ path: 'TeenusteValimine', params: { vehId: '7' } })
 }
 
 let deleteRow = function (index){
