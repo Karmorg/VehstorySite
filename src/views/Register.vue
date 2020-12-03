@@ -11,6 +11,7 @@
     <p>
       <input placeholder="Sisesta nimi" v-model="client.name">
       <input placeholder="Sisesta email" v-model="client.eMail">
+      <input placeholder="Sisesta parool" v-model="client.password">
     </p>
     <br>
     <button v-on:click="createAccount()"> Registreeri </button>
