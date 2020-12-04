@@ -82,7 +82,7 @@ let goToDashboard = function (vehicleId){
 }
 
 let goToServices = function (vehicleId){
-  this.$router.push({ path: 'TeenusteValimine', params: { vehId: '7' } })
+  this.$router.push({ path: 'TeenusteValimine', params: { vehId: vehicleId } })
 }
 
 let deleteRow = function (index){
@@ -120,7 +120,7 @@ export default {
       vehicle: {}
     }
   },
-  created() {this.getMyVehicles(2)   //Selle created meetodi tõmbab Vue alati esimesena tööle
+  created() {this.getMyVehicles(13)   //Selle created meetodi tõmbab Vue alati esimesena tööle
   }
 }
 </script>

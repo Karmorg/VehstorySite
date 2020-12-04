@@ -86,7 +86,7 @@ export default {
   },
   created() {
     let a =this.$route.params.vehId
-    this.getVehicleSelectedServices(8)   //Selle created meetodi tõmbab Vue alati esimesena tööle
+    this.getVehicleSelectedServices(a)   //Selle created meetodi tõmbab Vue alati esimesena tööle
   }
 }
 </script>

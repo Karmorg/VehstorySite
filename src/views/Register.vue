@@ -16,6 +16,7 @@
     <br>
     <button v-on:click="createAccount()"> Registreeri </button>
     <button v-on:click="login()"> Login </button>
+    <button v-on:click="logout()"> Logout </button>
     <br>  <br>
     <br>
     <button v-on:click="addRow"> Lisa rida </button>
@@ -88,7 +89,13 @@ let login = function (){
   this.$http.post(url, this.client)
       // .then(response => this.reply = response.data)
       // .then(alert(this.reply));
+      localStorage.setItem('user-token', token)
+      this.$http.defaults.headers.common['Authorization'] = "Bearer " + token
       .then(alert("Sisse logitud"))
+}
+
+let logout = function (){
+  localStorage.removeItem('user-token')
 }
 
 let getAllVehicles = function (){
@@ -103,14 +110,16 @@ export default {
     addRow:addRow,
     deleteRow:deleteRow,
     updateOdo:updateOdo,
-    login:login
+    login:login,
+    logout:logout
     // showResponse: showResponse
   },
   data: function (){      //Data on ka Vue enda sisene funtsioon
     return {
       vehicleList: [],
       client: {},
-      reply: {}    }
+      reply: {}
+    }
   },
   created() {this.getAllVehicles()    //Selle created meetodi tõmbab Vue alati esimesena tööle
   }
