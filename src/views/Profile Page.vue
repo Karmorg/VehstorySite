@@ -8,7 +8,9 @@
 
   <div>
     <p> <input placeholder="Kliendi nr" v-model="vehicle.clientId">
-      Ajutine väli sõiduki sisestamiseks, kuni sisse logimine ei tööta. </p>
+      Ajutine väli, kuni sisse logimine ei tööta.
+      <button v-on:click="getMyVehicles(vehicle.clientId)"> Vaheta klienti </button>
+    </p>
 
     <h1>Minu sõidukid</h1>
 
@@ -78,16 +80,15 @@ let updateOdo = function (index){
 }
 
 let goToDashboard = function (vehId){
-  this.$router.push({ name: 'Dashboard', vehicle: { vehId: vehId } })
+  this.$router.push({ name: 'Dashboard', params: { vehId: vehId } })
 }
 
 let goToServices = function (vehId){
-(alert(vehId))
   this.$router.push({ name: 'TeenusteValimine', params: { vehId: vehId  }  })
 }
 
 let deleteRow = function (index){
-  let url="http://localhost:8080/deleteVehicle" + "?id=" + this.vehicleList[index].vehId;
+  let url="http://localhost:8080/deleteVehicle?id=" + this.vehicleList[index].vehId;
   this.$http.put(url)
       .then(alert("Sõiduk kustutatud"))
       .then(this.vehicleList.splice(index, 1))
@@ -98,7 +99,7 @@ let addVehicle = function (){
   let url ="http://localhost:8080/addVehicle"
   this.$http.post(url, this.vehicle)
       .then(this.vehicleList.push(this.vehicle))
-      .then(alert("sõiduk lisatud"))
+      .then(alert("Sõiduk on lisatud. Alusta hoolduste valikuga."))
       // .then(this.$router.push({ path: 'Profilepage' }))
 }
 
@@ -122,7 +123,8 @@ export default {
     }
   },
   created() {
-    this.getMyVehicles(1)
+    this.vehicle.clientId = 1
+    this.getMyVehicles(this.vehicle.clientId)
      //Selle created meetodi tõmbab Vue alati esimesena tööle
   }
 }

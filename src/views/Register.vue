@@ -79,7 +79,7 @@ let createAccountFunction = function () {
   }
   this.$http.post(url, this.client)
       // .then(this.showResponse)
-      .then(alert("tehtud"))
+      .then(alert("Oled registreeritud kasutajaks"))
 }
 
 

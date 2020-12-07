@@ -51,8 +51,6 @@
         <td><input type="checkbox" id="checkbox" v-model="row.active">
           <label hidden for="checkbox">{{ row.active }}</label></td>
 
-
-
       </tr>
     </table>
     <br><br><br><br>
@@ -79,7 +77,7 @@ let test2 = function () {
   let url = "http://localhost:8080/updateSelectedService";
 
   this.$http.put(url, this.resultList)
-      .then(alert("uuendatud"))
+      .then(this.$router.push({ name: 'Dashboard', vehicle: { vehId: this.$route.params.vehId } }))
 
 }
 

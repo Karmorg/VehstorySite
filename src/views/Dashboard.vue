@@ -7,10 +7,12 @@
 <template>
 
   <div>
-    <p> <input placeholder="Sõiduki nr" v-model="vehicle.vehicleId">
-      Ajutine väli hoolduste sisestamiseks, kuni sisse logimine ei tööta. </p>
-    <button v-on:click="getVehicleSelectedServices(vehicle.vehicleId)" > Vaheta sõidukit </button>
-    <button v-on:click="addServiceLog(vehicle.vehicleId)" > Sisesta hooldused logisse </button>
+    <p> <input placeholder="Sõiduki nr" v-model="vehicle.vehId">
+      Ajutine väli peab hoolduste sisestamiseks olema täidetd. Kuni sisse logimine ei tööta. </p>
+    <button v-on:click="getVehicleSelectedServices(vehicle.vehId)" > Vaheta sõidukit </button>
+    <br><br>
+    <button v-on:click="goToServices(vehicle.vehId)" > Lisa hooldusi </button>
+    <button v-on:click="addServiceLog()" > Sisesta hooldused logisse </button>
 
     <h1>Töölaud</h1>
 
@@ -56,10 +58,11 @@ let getVehicleSelectedServices = function (vehicleId){
       .then(response => this.vehicleSelectedServiceList = response.data);
 }
 
-let addServiceLog = function (vehicleId){
+let addServiceLog = function (){
   let url = "http://localhost:8080/addServiceLog"
   this.$http.post(url, this.vehicleSelectedServiceList)
   .then(alert("kanded ajaloos"))
+
 }
 
 let updateOdo = function (index){
@@ -76,6 +79,10 @@ let updateOdo = function (index){
       .then(alert("uuendatud"))
 }
 
+let goToServices = function (vehId){
+  this.$router.push({ name: 'TeenusteValimine', params: { vehId: vehId  }  })
+}
+
 let deleteRow = function (index){
   let url="http://localhost:8080/deleteVehicle?id=" + this.vehicleSelectedServiceList[index].vehId;
   this.$http.put(url)
@@ -89,7 +96,8 @@ export default {
     getVehicleSelectedServices:getVehicleSelectedServices,
     deleteRow:deleteRow,
     updateOdo:updateOdo,
-    addServiceLog
+    addServiceLog,
+    goToServices
 
   },
   data: function (){      //Data on ka Vue enda sisene funtsioon
@@ -99,8 +107,9 @@ export default {
     }
   },
   created() {
-    // this.getVehicleSelectedServices(this.$route.params.vehId)   //Selle created meetodi tõmbab Vue alati esimesena tööle
-    this.getVehicleSelectedServices(3)   //Selle created meetodi tõmbab Vue alati esimesena tööle
+    this.vehicle.vehId = this.$route.params.vehId
+    // this.getVehicleSelectedServices(this.vehicle.vehId)   //Selle created meetodi tõmbab Vue alati esimesena tööle
+    this.getVehicleSelectedServices(this.vehicle.vehId)
   }
 }
 </script>
