@@ -10,13 +10,16 @@
     <p> <input placeholder="Sõiduki nr" v-model="vehicle.vehicleId">
       Ajutine väli hoolduste sisestamiseks, kuni sisse logimine ei tööta. </p>
     <button v-on:click="getVehicleSelectedServices(vehicle.vehicleId)" > Vaheta sõidukit </button>
+    <button v-on:click="addServiceLog(vehicle.vehicleId)" > Sisesta hooldused logisse </button>
 
     <h1>Töölaud</h1>
 
     <table border="1" align="center">
       <tr>
         <th hidden>Id</th>
+        <th>Töö nr</th>
         <th>Hooldus/töö</th>
+        <th>Sõiduki nr</th>
         <th>Välba ühik</th>
         <th>Välba väärtus</th>
         <th>Eelmine kp</th>
@@ -29,15 +32,17 @@
       </tr>
       <tr v-for="(row, index) in vehicleSelectedServiceList">
         <td hidden>{{index}}</td>
+        <td>{{row.serviceId}}</td>
         <td>{{row.serviceName}}</td>
+        <td>{{row.vehicleId}}</td>
         <td>{{row.pUnit}}</td>
         <td>{{row.pValue}}</td>
         <td>{{row.lastSDate}}</td>
         <td>{{row.lastSOdo}}</td>
         <td>{{row.nextSDate}}</td>
         <td>{{row.nextSOdo}}</td>
-        <td><input v-model="doneDate" ></td>
-        <td><input v-model="doneOdo" ></td>
+        <td><input type="date" v-model="row.serviceDate" ></td>
+        <td><input v-model="row.serviceOdo" ></td>
         <td><input v-model="row.comment" ></td>
       </tr>
     </table>
@@ -49,6 +54,12 @@
 let getVehicleSelectedServices = function (vehicleId){
   this.$http.get("http://localhost:8080/VehicleSelectedServiceListDashboard?vehicleId=" + vehicleId)
       .then(response => this.vehicleSelectedServiceList = response.data);
+}
+
+let addServiceLog = function (vehicleId){
+  let url = "http://localhost:8080/addServiceLog"
+  this.$http.post(url, this.vehicleSelectedServiceList)
+  .then(alert("kanded ajaloos"))
 }
 
 let updateOdo = function (index){
@@ -72,25 +83,14 @@ let deleteRow = function (index){
       .then(this.vehicleList.splice(index, 1))
 }
 
-let addVehicle = function (){
-  this.vehicle.active = true;
-  let url ="http://localhost:8080/addVehicle"
-  this.$http.post(url, this.vehicle)
-      .then(this.vehicleSelectedServiceList.push(this.vehicle))
-      .then(alert("sõiduk lisatud"))
-      // .then(this.$router.push({ path: 'Profilepage' }))
-}
-
-let randomFunction = function (){
-  getSelection()
-}
 
 export default {
   methods: {
     getVehicleSelectedServices:getVehicleSelectedServices,
     deleteRow:deleteRow,
     updateOdo:updateOdo,
-    addVehicle:addVehicle
+    addServiceLog
+
   },
   data: function (){      //Data on ka Vue enda sisene funtsioon
     return {
@@ -98,7 +98,9 @@ export default {
       vehicle: {}
     }
   },
-  created() {this.getVehicleSelectedServices(8)   //Selle created meetodi tõmbab Vue alati esimesena tööle
+  created() {
+    // this.getVehicleSelectedServices(this.$route.params.vehId)   //Selle created meetodi tõmbab Vue alati esimesena tööle
+    this.getVehicleSelectedServices(84)   //Selle created meetodi tõmbab Vue alati esimesena tööle
   }
 }
 </script>
