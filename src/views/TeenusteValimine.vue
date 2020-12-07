@@ -9,7 +9,7 @@
     </header>
     <table border="1">
       <tr hidden>
-        <th>AutoId</th>
+        <th>AutoID</th>
         <th>Tootja</th>
         <th>Mudel</th>
         <th>RegNr</th>
