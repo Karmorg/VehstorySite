@@ -77,7 +77,7 @@ let updateOdo = function (index){
 }
 
 let deleteRow = function (index){
-  let url="http://localhost:8080/deleteVehicle" + "?id=" + this.vehicleSelectedServiceList[index].vehId;
+  let url="http://localhost:8080/deleteVehicle?id=" + this.vehicleSelectedServiceList[index].vehId;
   this.$http.put(url)
       .then(alert("Sõiduk kustutatud"))
       .then(this.vehicleList.splice(index, 1))
@@ -100,7 +100,7 @@ export default {
   },
   created() {
     // this.getVehicleSelectedServices(this.$route.params.vehId)   //Selle created meetodi tõmbab Vue alati esimesena tööle
-    this.getVehicleSelectedServices(84)   //Selle created meetodi tõmbab Vue alati esimesena tööle
+    this.getVehicleSelectedServices(3)   //Selle created meetodi tõmbab Vue alati esimesena tööle
   }
 }
 </script>
