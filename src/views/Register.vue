@@ -86,12 +86,15 @@ let createAccountFunction = function () {
 
 let login = function (){
   let url = "http://localhost:8080/login"
-  this.$http.post(url, this.client)
+  this.$http.post(url, this.client).
+      then(response => {
+        let token = response.data;
+        localStorage.setItem('user-token', token)
+        this.$http.defaults.headers.common['Authorization'] = "Bearer " + token
+        alert("Sisse logitud")
+  })
       // .then(response => this.reply = response.data)
       // .then(alert(this.reply));
-      localStorage.setItem('user-token', token)
-      this.$http.defaults.headers.common['Authorization'] = "Bearer " + token
-      .then(alert("Sisse logitud"))
 }
 
 let logout = function (){

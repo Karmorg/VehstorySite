@@ -120,7 +120,7 @@ export default {
       vehicle: {}
     }
   },
-  created() {this.getMyVehicles(13)   //Selle created meetodi tõmbab Vue alati esimesena tööle
+  created() {this.getMyVehicles(3)   //Selle created meetodi tõmbab Vue alati esimesena tööle
   }
 }
 </script>
