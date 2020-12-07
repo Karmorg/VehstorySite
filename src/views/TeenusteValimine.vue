@@ -8,18 +8,20 @@
       </p>
     </header>
     <table border="1">
-      <tr>
-        <th>Auto</th>
+      <tr hidden>
+        <th>AutoId</th>
+        <th>Tootja</th>
+        <th>Mudel</th>
         <th>RegNr</th>
       </tr>
-      <tr>
-        <td>siia on vaja midagi, mis kuvaks andmed</td>
-        <td>ja siia ka</td>
+      <tr v-for="(row, index) in resultList1">
+        <td hidden>{{row.id}}</td>
+        <td>{{row.manufacturer}}</td>
+        <td>{{row.model}}</td>
+        <td>{{row.regNo}}</td>
       </tr>
     </table>
-
     <button v-on:click="test2()">salvesta</button>
-
     <br><br>
     <table border="1" align="center">
       <tr>
@@ -59,6 +61,13 @@
 
 <script>
 
+let getOneVehicle = function(vehId) {
+  let url="http://localhost:8080/oneVehicle?vehicleId="+vehId;
+
+  this.resultList1=this.$http.get(url)
+  .then(result => this.resultList1=result.data)
+}
+
 let getData = function (vehId) {
   let url = "http://localhost:8080/VehicleServiceListWithServiceName?vehicleId=" + vehId;
 
@@ -78,14 +87,17 @@ export default {
   methods: {
     getData: getData,
     test2: test2,
+    getOneVehicle:getOneVehicle
   },
   data: function () {
     return {
-      resultList: []
+      resultList: [],
+      resultList1:[]
     }
   },
   created() {
     this.getData(this.$route.params.vehId)
+    this.getOneVehicle(this.$route.params.vehId)
   }
 }
 </script>
