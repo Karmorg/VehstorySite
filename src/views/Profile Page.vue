@@ -77,12 +77,13 @@ let updateOdo = function (index){
       .then(alert("uuendatud"))
 }
 
-let goToDashboard = function (vehicleId){
-  this.$router.push({ path: 'Dashboard', vehicle: { vehId: '7' } })
+let goToDashboard = function (vehId){
+  this.$router.push({ name: 'Dashboard', vehicle: { vehId: vehId } })
 }
 
-let goToServices = function (vehicleId){
-  this.$router.push({ path: 'TeenusteValimine', vehicle: { vehId: '7' } })
+let goToServices = function (vehId){
+(alert(vehId))
+  this.$router.push({ name: 'TeenusteValimine', params: { vehId: vehId  }  })
 }
 
 let deleteRow = function (index){
@@ -120,7 +121,9 @@ export default {
       vehicle: {}
     }
   },
-  created() {this.getMyVehicles(2)   //Selle created meetodi tõmbab Vue alati esimesena tööle
+  created() {
+    this.getMyVehicles(10)
+     //Selle created meetodi tõmbab Vue alati esimesena tööle
   }
 }
 </script>

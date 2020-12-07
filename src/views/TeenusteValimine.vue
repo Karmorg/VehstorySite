@@ -2,12 +2,11 @@
   <div>
     <h1>Teenuste valimine</h1>
     <br><br>
-    <p>
-      <!--      <button v-on:click="test()">vajuta</button>-->
-    </p>
-    <p align="right">
-      <button v-on:click="test2()">salvesta</button>
-    </p>
+
+    <header>
+      <p align="left">
+      </p>
+    </header>
     <table border="1">
       <tr>
         <th>Auto</th>
@@ -18,6 +17,9 @@
         <td>ja siia ka</td>
       </tr>
     </table>
+
+    <button v-on:click="test2()">salvesta</button>
+
     <br><br>
     <table border="1" align="center">
       <tr>
@@ -28,7 +30,8 @@
         <th>Välba ühik</th>
         <th>Välba väärtus</th>
         <th>Märkus</th>
-        <th>Valitud/staatus</th>
+                <th>Valitud/staatus</th>
+
 
       </tr>
       <tr v-for="(row, index) in resultList">
@@ -46,6 +49,8 @@
         <td><input type="checkbox" id="checkbox" v-model="row.active">
           <label hidden for="checkbox">{{ row.active }}</label></td>
 
+
+
       </tr>
     </table>
     <br><br><br><br>
@@ -54,8 +59,8 @@
 
 <script>
 
-let getData = function () {
-  let url = "http://localhost:8080/VehicleServiceListWithServiceName?vehicleId=8";
+let getData = function (vehId) {
+  let url = "http://localhost:8080/VehicleServiceListWithServiceName?vehicleId=" + vehId;
 
   this.resultList = this.$http.get(url)
       .then(result => this.resultList = result.data)
@@ -80,7 +85,7 @@ export default {
     }
   },
   created() {
-    this.getData()
+    this.getData(this.$route.params.vehId)
   }
 }
 </script>
