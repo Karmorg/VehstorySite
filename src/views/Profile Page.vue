@@ -39,6 +39,7 @@
         <td><button v-on:click="updateOdo(index)" > Uuenda läbisõitu </button></td>
         <td><button v-on:click="goToServices(row.vehId)" > Hoolduste valik </button></td>
         <td><button v-on:click="goToDashboard(row.vehId)" > Töölauale </button></td>
+        <td><button v-on:click="goToServiceLog(row.vehId)" > Hoolduste logi </button></td>
         <td><button v-on:click="deleteRow(index)">Kustuta sõiduk</button></td>
       </tr>
       <tr>
@@ -85,6 +86,10 @@ let goToServices = function (vehicleId){
   this.$router.push({ path: 'TeenusteValimine', params: { vehId: vehicleId } })
 }
 
+let goToServiceLog = function (vehicleId){
+  this.$router.push({ path: 'HooldusteLogi', params: { vehId: vehicleId } })
+}
+
 let deleteRow = function (index){
   let url="http://localhost:8080/deleteVehicle" + "?id=" + this.vehicleList[index].vehId;
   this.$http.put(url)
@@ -112,7 +117,8 @@ export default {
     updateOdo:updateOdo,
     addVehicle:addVehicle,
     goToDashboard:goToDashboard,
-    goToServices:goToServices
+    goToServices:goToServices,
+    goToServiceLog:goToServiceLog
   },
   data: function (){      //Data on ka Vue enda sisene funtsioon
     return {
