@@ -29,18 +29,18 @@
 // }
 
 let createAccountFunction = function () {
-  let url = "http://localhost:8080/register";
+  let url = "http://localhost:8080/public/register";
   let config = {
     params: {}
   }
   this.$http.post(url, this.client)
       // .then(this.showResponse)
       .then(alert("Oled registreeritud kasutajaks"))
-      .then(this.login())
+      // .then(this.login())
 }
 
 let login = function (){
-  let url = "http://localhost:8080/login"
+  let url = "http://localhost:8080/public/login"
   this.$http.post(url, this.client).
       then(response => {
         let token = response.data;

@@ -60,12 +60,12 @@
 <script>
 
 let getAllVehicles = function (){
-  this.$http.get("http://localhost:8080/allVehicles")
+  this.$http.get("http://localhost:8080/public/allVehicles")
       .then(response => this.vehicleList = response.data);
 }
 
 let updateOdo = function (index){
-  let url = "http://localhost:8080/updateOdo";
+  let url = "http://localhost:8080/client/updateOdo";
   let body = {
     vehId: this.vehicleList[index].vehId,
     newOdo: this.vehicleList[index].odo
@@ -76,7 +76,7 @@ let updateOdo = function (index){
 }
 
 let deleteRow = function (index){
-  let url="http://localhost:8080/deleteVehicle?id=" + this.vehicleList[index].vehId;
+  let url="http://localhost:8080/client/deleteVehicle?id=" + this.vehicleList[index].vehId;
   this.$http.put(url)
       .then(alert("Sõiduk kustutatud"))
       .then(this.vehicleList.splice(index, 1))
@@ -85,7 +85,7 @@ let deleteRow = function (index){
 
 let addVehicle = function (){
   this.vehicle.active = true;
-  let url ="http://localhost:8080/addVehicle"
+  let url ="http://localhost:8080/client/addVehicle"
   this.$http.post(url, this.vehicle)
       .then(this.getAllVehicles())
 }

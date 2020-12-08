@@ -60,21 +60,21 @@
 <script>
 
 let getOneVehicle = function(vehId) {
-  let url="http://localhost:8080/oneVehicle?vehicleId="+vehId;
+  let url="http://localhost:8080/client/oneVehicle?vehicleId="+vehId;
 
   this.resultList1=this.$http.get(url)
   .then(result => this.resultList1=result.data)
 }
 
 let getData = function (vehId) {
-  let url = "http://localhost:8080/VehicleServiceListWithServiceName?vehicleId=" + vehId;
+  let url = "http://localhost:8080/client/VehicleServiceListWithServiceName?vehicleId=" + vehId;
 
   this.resultList = this.$http.get(url)
       .then(result => this.resultList = result.data)
 }
 
 let test2 = function () {
-  let url = "http://localhost:8080/updateSelectedService";
+  let url = "http://localhost:8080/client/updateSelectedService";
 
   this.$http.put(url, this.resultList)
       .then(this.$router.push({ name: 'Dashboard', vehicle: { vehId: this.$route.params.vehId } }))

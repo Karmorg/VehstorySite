@@ -72,26 +72,26 @@
 <script>
 
 let getOneVehicle = function(vehId) {
-  let url="http://localhost:8080/oneVehicle?vehicleId="+vehId;
+  let url="http://localhost:8080/client/oneVehicle?vehicleId="+vehId;
 
   this.resultList1=this.$http.get(url)
       .then(result => this.resultList1=result.data)
 }
 
 let getVehicleSelectedServices = function (vehicleId){
-  this.$http.get("http://localhost:8080/VehicleSelectedServiceListDashboard?vehicleId=" + vehicleId)
+  this.$http.get("http://localhost:8080/client/VehicleSelectedServiceListDashboard?vehicleId=" + vehicleId)
       .then(response => this.vehicleSelectedServiceList = response.data);
 }
 
 let addServiceLog = function (){
-  let url = "http://localhost:8080/addServiceLog"
+  let url = "http://localhost:8080/client/addServiceLog"
   this.$http.post(url, this.vehicleSelectedServiceList)
   .then(alert("kanded ajaloos"))
 
 }
 
 let updateOdo = function (index) {
-  let url = "http://localhost:8080/updateOdo";
+  let url = "http://localhost:8080/client/updateOdo";
 
   let body = {
     vehId: this.vehicleSelectedServiceList[index].vehId,
@@ -107,7 +107,7 @@ let goToServices = function (vehId){
 }
 
 let deleteRow = function (index){
-  let url="http://localhost:8080/deleteVehicle?id=" + this.vehicleSelectedServiceList[index].vehId;
+  let url="http://localhost:8080/client/deleteVehicle?id=" + this.vehicleSelectedServiceList[index].vehId;
   this.$http.put(url)
       .then(alert("Sõiduk kustutatud"))
       .then(this.vehicleList.splice(index, 1))
