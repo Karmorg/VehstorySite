@@ -11,12 +11,27 @@
       Ajutine väli peab hoolduste sisestamiseks olema täidetd. Kuni sisse logimine ei tööta. </p>
     <button v-on:click="getVehicleSelectedServices(vehicle.vehId)" > Vaheta sõidukit </button>
     <br><br>
-    <button v-on:click="goToServices(vehicle.vehId)" > Lisa hooldusi </button>
-    <button v-on:click="addServiceLog()" > Sisesta hooldused logisse </button>
 
     <h1>Töölaud</h1>
 
-    <button v-on:click="addLog()"> Sisesta tööd logisse</button>
+    <table border="1">
+      <tr >
+        <th hidden>AutoID</th>
+        <th>Tootja</th>
+        <th>Mudel</th>
+        <th>RegNr</th>
+      </tr>
+      <tr v-for="(row, index) in resultList1">
+        <td hidden>{{row.id}}</td>
+        <td>{{row.manufacturer}}</td>
+        <td>{{row.model}}</td>
+        <td>{{row.regNo}}</td>
+      </tr>
+    </table>
+
+    <button v-on:click="goToServices(vehicle.vehId)" > Lisa hooldusi </button>
+    <button v-on:click="addServiceLog()" > Sisesta hooldused logisse </button>
+
     <br> <br>
 
     <table border="1" align="center">
@@ -56,6 +71,13 @@
 
 <script>
 
+let getOneVehicle = function(vehId) {
+  let url="http://localhost:8080/oneVehicle?vehicleId="+vehId;
+
+  this.resultList1=this.$http.get(url)
+      .then(result => this.resultList1=result.data)
+}
+
 let getVehicleSelectedServices = function (vehicleId){
   this.$http.get("http://localhost:8080/VehicleSelectedServiceListDashboard?vehicleId=" + vehicleId)
       .then(response => this.vehicleSelectedServiceList = response.data);
@@ -91,30 +113,27 @@ let deleteRow = function (index){
       .then(this.vehicleList.splice(index, 1))
 }
 
-let addLog = function () {
-  let url = "http://localhost:8080/addServiceLog";
-  this.$http.post(url, this.vehicleSelectedServiceList)
-}
-
 export default {
   methods: {
     getVehicleSelectedServices:getVehicleSelectedServices,
+    getOneVehicle: getOneVehicle,
     deleteRow:deleteRow,
     updateOdo:updateOdo,
     addServiceLog,
-    goToServices
+    goToServices,
 
   },
   data: function (){      //Data on ka Vue enda sisene funtsioon
     return {
       vehicleSelectedServiceList: [],
-      vehicle: {}
+      vehicle: {},
+      resultList1: []
     }
   },
   created() {
     this.vehicle.vehId = this.$route.params.vehId
-    // this.getVehicleSelectedServices(this.vehicle.vehId)   //Selle created meetodi tõmbab Vue alati esimesena tööle
     this.getVehicleSelectedServices(this.vehicle.vehId)
+    this.getOneVehicle(this.vehicle.vehId)
   }
 }
 </script>
