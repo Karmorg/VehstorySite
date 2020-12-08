@@ -16,6 +16,7 @@
     <br>
     <button v-on:click="createAccount()"> Registreeri </button>
     <button v-on:click="login()"> Login </button>
+    <button v-on:click="logout()"> Logout </button>
     <br>  <br>
     <br>
     <button v-on:click="addRow"> Lisa rida </button>
@@ -83,10 +84,21 @@ let createAccountFunction = function () {
 }
 
 
-let loginFunction= function (){
-  let url = "http://localhost:8080/login";
-  this.$http.post(url, this.client)
+let login = function (){
+  let url = "http://localhost:8080/login"
+  this.$http.post(url, this.client).
+      then(response => {
+        let token = response.data;
+        localStorage.setItem('user-token', token)
+        this.$http.defaults.headers.common['Authorization'] = "Bearer " + token
+        alert("Sisse logitud")
+  })
+      // .then(response => this.reply = response.data)
+      // .then(alert(this.reply));
+}
 
+let logout = function (){
+  localStorage.removeItem('user-token')
 }
 
 let getAllVehicles = function (){
@@ -101,17 +113,27 @@ export default {
     addRow:addRow,
     deleteRow:deleteRow,
     updateOdo:updateOdo,
-    login:loginFunction,
-    //showesponse:showresponse
+    login:login,
+    logout:logout
+    // showResponse: showResponse
   },
   data: function (){      //Data on ka Vue enda sisene funtsioon
     return {
       vehicleList: [],
-      client: {}
+      client: {},
+      reply: {}
     }
   },
   created() {this.getAllVehicles()    //Selle created meetodi tõmbab Vue alati esimesena tööle
   }
 }
-
+// @ is an alias to /src
+// import HelloWorld from '@/components/HelloWorld.vue'
+//
+// export default {
+//   name: 'Home',
+//   components: {
+//     HelloWorld
+//   }
+// }
 </script>

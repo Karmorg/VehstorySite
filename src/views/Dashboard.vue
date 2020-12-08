@@ -16,6 +16,9 @@
 
     <h1>Töölaud</h1>
 
+    <button v-on:click="addLog()"> Sisesta tööd logisse</button>
+    <br> <br>
+
     <table border="1" align="center">
       <tr>
         <th hidden>Id</th>
@@ -33,7 +36,7 @@
         <th>Märkus</th>
       </tr>
       <tr v-for="(row, index) in vehicleSelectedServiceList">
-        <td hidden>{{index}}</td>
+        <td hidden>{{index+1}}</td>
         <td>{{row.serviceId}}</td>
         <td>{{row.serviceName}}</td>
         <td>{{row.vehicleId}}</td>
@@ -65,11 +68,9 @@ let addServiceLog = function (){
 
 }
 
-let updateOdo = function (index){
+let updateOdo = function (index) {
   let url = "http://localhost:8080/updateOdo";
-  let config = {    //selle osa võib ka ära jätta
-    params: {}
-  }
+
   let body = {
     vehId: this.vehicleSelectedServiceList[index].vehId,
     newOdo: this.vehicleSelectedServiceList[index].odo
@@ -90,6 +91,10 @@ let deleteRow = function (index){
       .then(this.vehicleList.splice(index, 1))
 }
 
+let addLog = function () {
+  let url = "http://localhost:8080/addServiceLog";
+  this.$http.post(url, this.vehicleSelectedServiceList)
+}
 
 export default {
   methods: {
