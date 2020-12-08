@@ -29,11 +29,12 @@
         <th>Staatus</th>
       </tr>
       <tr v-for="(row, index) in vehicleServisLog">
-        <td hidden>{{row.id}}</td>
-        <td hidden>{{row.logDate}}</td>
-        <td hidden>{{row.vehicleId}}</td>
-        <td hidden>{{row.serviceName}}</td>
-        <td hidden>{{row.serviceName}}</td>
+        <td >{{row.id}}</td>
+        <td >{{row.logDate}}</td>
+        <td >{{row.vehicleId}}</td>
+        <td >{{row.serviceName}}</td>
+        <td >{{row.serviceName}}</td>
+        <td >{{row.serviceName}}</td>
       </tr>
 
 
