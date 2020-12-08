@@ -65,6 +65,15 @@ let getMyVehicles = function (clientId){
       .then(response => this.vehicleList = response.data);
 }
 
+let addVehicle = function (){
+  this.vehicle.active = true;
+  let url ="http://localhost:8080/addVehicle"
+  this.$http.post(url, this.vehicle)
+      .then(this.vehicleList.push(this.vehicle))
+      .then(alert("Sõiduk on lisatud. Alusta hoolduste valikuga."))
+  // .then(this.$router.push({ path: 'Profilepage' }))
+}
+
 let updateOdo = function (index){
   let url = "http://localhost:8080/updateOdo";
   let config = {    //selle osa võib ka ära jätta
@@ -92,19 +101,6 @@ let deleteRow = function (index){
   this.$http.put(url)
       .then(alert("Sõiduk kustutatud"))
       .then(this.vehicleList.splice(index, 1))
-}
-
-let addVehicle = function (){
-  this.vehicle.active = true;
-  let url ="http://localhost:8080/addVehicle"
-  this.$http.post(url, this.vehicle)
-      .then(this.vehicleList.push(this.vehicle))
-      .then(alert("Sõiduk on lisatud. Alusta hoolduste valikuga."))
-      // .then(this.$router.push({ path: 'Profilepage' }))
-}
-
-let randomFunction = function (){
-  getSelection()
 }
 
 export default {

@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/register">Register</router-link> |
-      <router-link to="/Profilepage">Profile page</router-link> |
+      <router-link to="/register">Registreeri kliendiks/ logi sisse</router-link> |
+      <router-link to="/Profilepage">Minu sõidukid</router-link> |
       <router-link to="/Admin">Admin</router-link>
     </div>
     <router-view/>
