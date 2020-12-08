@@ -77,8 +77,7 @@ let test2 = function () {
   let url = "http://localhost:8080/client/updateSelectedService";
 
   this.$http.put(url, this.resultList)
-      .then(this.$router.push({ name: 'Dashboard', vehicle: { vehId: this.$route.params.vehId } }))
-
+      .then(this.$router.push({ name: 'Dashboard', params: { vehId: this.$route.params.vehId } }))
 }
 
 export default {
@@ -90,7 +89,8 @@ export default {
   data: function () {
     return {
       resultList: [],
-      resultList1:[]
+      resultList1:[],
+      vehicle: {}
     }
   },
   created() {

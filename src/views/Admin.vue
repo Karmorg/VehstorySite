@@ -1,4 +1,4 @@
-<template>
+<template xmlns="http://www.w3.org/1999/html">
   <div class="Admin">
   </div>
 
@@ -7,7 +7,8 @@
 <template>
 
   <div>
-    <input placeholder="Kliendi nr" v-model="vehicle.clientId">
+    <p><input placeholder="Kliendi nr" v-model="vehicle.clientId"> Täita sõiduki sisestamisel </p>
+
     <h1>Kõik sõidukid</h1>
 
     <table border="1" align="center">
