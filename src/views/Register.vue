@@ -35,7 +35,7 @@
 // }
 
 let createAccountFunction = function () {
-  let url = "http://localhost:8080/public/register";
+  let url = this.$host + "/public/register";
   let config = {
     params: {}
   }
@@ -46,7 +46,7 @@ let createAccountFunction = function () {
 }
 
 let login = function (){
-  let url = "http://localhost:8080/public/login"
+  let url = this.$host + "/public/login"
   this.$http.post(url, this.client).
       then(response => {
         let token = response.data;
