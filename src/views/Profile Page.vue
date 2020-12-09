@@ -61,13 +61,13 @@
 <script>
 
 let getMyVehicles = function (clientId){
-  this.$http.get("http://localhost:8080/client/myVehicles?clientId=" + clientId)
+  this.$http.get(this.$host + "/client/myVehicles?clientId=" + clientId)
       .then(response => this.vehicleList = response.data);
 }
 
 let addVehicle = function (){
   this.vehicle.active = true;
-  let url ="http://localhost:8080/client/addVehicle"
+  let url =this.$host + "/client/addVehicle"
   this.$http.post(url, this.vehicle)
       .then(() => {
           alert("Sõiduk on lisatud. Alusta hoolduste valikuga.")
@@ -78,7 +78,7 @@ let addVehicle = function (){
 }
 
 let updateOdo = function (index){
-  let url = "http://localhost:8080/client/updateOdo";
+  let url = this.$host + "/client/updateOdo";
   let config = {    //selle osa võib ka ära jätta
     params: {}
   }
@@ -100,7 +100,7 @@ let goToServices = function (vehId){
 }
 
 let deleteRow = function (index){
-  let url="http://localhost:8080/client/deleteVehicle?id=" + this.vehicleList[index].vehId;
+  let url=this.$host + "/client/deleteVehicle?id=" + this.vehicleList[index].vehId;
   this.$http.put(url)
       .then(alert("Sõiduk kustutatud"))
       .then(this.vehicleList.splice(index, 1))

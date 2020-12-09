@@ -107,7 +107,7 @@ let goToServices = function (vehId){
 }
 
 let deleteRow = function (index){
-  let url="http://localhost:8080/client/deleteVehicle?id=" + this.vehicleSelectedServiceList[index].vehId;
+  let url=this.$host + "/client/deleteVehicle?id=" + this.vehicleSelectedServiceList[index].vehId;
   this.$http.put(url)
       .then(alert("Sõiduk kustutatud"))
       .then(this.vehicleList.splice(index, 1))
