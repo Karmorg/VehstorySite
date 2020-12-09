@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Ajalugu</h1>
+    <h5>Ajalugu</h5>
     <br>
     <table align="center" border="1">
       <tr hidden>
@@ -11,34 +11,35 @@
       </tr>
       <tr v-for="(row, index) in resultList1">
         <td hidden>{{ row.id }}</td>
-        <td>{{ row.manufacturer }}</td>
-        <td>{{ row.model }}</td>
-        <td>{{ row.regNo }}</td>
+        <th bgcolor="#7fffd4" width="60">{{ row.manufacturer }}</th>
+        <td width="60">{{ row.model }}</td>
+        <td width="60">{{ row.regNo }}</td>
       </tr>
     </table>
     <br>
-    <table border="1">
+    <table align="center" border="1">
       <tr>
-        <th>ID</th>
-        <th>Kuupäev</th>
-        <th>Auto Id</th>
-        <th>Hooldus</th>
-        <th>Kuupäev</th>
-        <th>Läbisõit</th>
-        <th>Kommentaar</th>
-        <th>Staatus</th>
+        <th>Nr</th>
+        <th hidden>ID</th>
+        <th width="125">Kuupäev</th>
+        <th hidden>Auto Id</th>
+        <th width="125">Hooldus</th>
+        <th width="125">Kuupäev</th>
+        <th width="100">Läbisõit</th>
+        <th width="125">Kommentaar</th>
+        <th hidden>Staatus</th>
       </tr>
-      <tr v-for="(row, index) in vehicleServisLog">
-        <td>{{ row.id }}</td>
+      <tr v-for="(row, index) in vehicleServiceLog">
+        <td>{{index+1}}</td>
+        <td hidden>{{row.id}}</td>
         <td>{{ row.logDate }}</td>
-        <td>{{ row.vehicleId }}</td>
-        <td>{{ row.serviceName }}</td>
+        <td hidden>{{ row.vehicleId }}</td>
+        <td >{{ row.serviceName }}</td>
         <td>{{ row.serviceDate }}</td>
         <td>{{ row.serviceOdo }}</td>
         <td>{{ row.comment }}</td>
-        <td>{{ row.active }}</td>
+        <td hidden>{{ row.active }}</td>
       </tr>
-
     </table>
 
 
@@ -55,7 +56,7 @@ let getOneVehicle = function (vehId) {
       .then(result => this.resultList1 = result.data)
 }
 let getVehicleServiceLog = function (vehId) {
-  let url = "http://localhost:8080/vehicleServiceLog?vehicleId=8";
+  let url = "http://localhost:8080/client/vehicleServiceLog?vehicleId=" +vehId;
 
   this.vehicleServiceLog = this.$http.get(url)
       .then(result => this.vehicleServiceLog = result.data);
@@ -76,10 +77,29 @@ export default {
   },
   created() {
     this.getOneVehicle(this.$route.params.vehId)
-    this.getVehicleServiceLog(this.$route.params.vehid)
+    this.getVehicleServiceLog(this.$route.params.vehId)
 
   }
 }
 
 
 </script>
+<style scoped>
+h1 {
+  margin: 80px 0 0;
+  color: darkcyan ;
+}
+ul {
+  list-style-type: none;
+
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #42b983;
+}
+</style>
+
