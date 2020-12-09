@@ -54,6 +54,7 @@ let login = function (){
 
 let logout = function (){
   localStorage.removeItem('user-token')
+  location.reload()
 }
 
 export default {

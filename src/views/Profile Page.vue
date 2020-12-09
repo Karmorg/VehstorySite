@@ -69,8 +69,11 @@ let addVehicle = function (){
   this.vehicle.active = true;
   let url ="http://localhost:8080/client/addVehicle"
   this.$http.post(url, this.vehicle)
-      .then(this.vehicleList.push(this.vehicle))
-      .then(alert("Sõiduk on lisatud. Alusta hoolduste valikuga."))
+      .then(() => {
+          alert("Sõiduk on lisatud. Alusta hoolduste valikuga.")
+          this.getMyVehicles(this.vehicle.clientId)
+          this.vehicle = {}})
+      // .then(this.$router.push({ name: 'TeenusteValimine', params: { vehId: vehId  }  }))
   // .then(this.$router.push({ path: 'Profilepage' }))
 }
 
