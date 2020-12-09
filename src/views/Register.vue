@@ -1,6 +1,7 @@
 <template>
   <div class="register">
     <img alt="Vue logo" src="../assets/logo.png">
+    <img src="">
   </div>
 
 </template>
@@ -9,13 +10,18 @@
   <div>
     <p>
       <input placeholder="Sisesta nimi" v-model="client.name">
+      <br>
+      <br>
       <input placeholder="Sisesta email" v-model="client.eMail">
-      <input placeholder="Sisesta parool" v-model="client.password">
+      <br>
+      <br>
+      <input type="password" placeholder="Sisesta parool" v-model="client.password">
     </p>
     <br>
-    <button v-on:click="createAccount()"> Registreeri </button>
-    <button v-on:click="login()"> Login </button>
-    <button v-on:click="logout()"> Logout </button>
+    <button v-on:click="createAccount()"> Registreeri </button>      <button v-on:click="login()"> Logi sisse </button>
+    <br>
+    <br>
+    <button v-on:click="logout()"> Logi välja </button>
     <br>  <br>
     <br>
 <!--    <button v-on:click="addRow"> Lisa rida </button>-->

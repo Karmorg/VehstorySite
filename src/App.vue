@@ -1,4 +1,4 @@
-<template>
+<template >
   <div id="app">
     <div id="nav">
       <router-link to="/register">Registreeri kliendiks/ logi sisse</router-link> |
@@ -16,6 +16,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+
 }
 
 #nav {
@@ -28,6 +29,6 @@
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: dodgerblue;
 }
 </style>

@@ -1,13 +1,13 @@
 <template>
   <div>
     <h1>Teenuste valimine</h1>
-    <br><br>
-
+    <img alt="Vue logo" src="../assets/logo.png">
+    <br>
     <header>
       <p align="left">
       </p>
     </header>
-    <table border="1">
+    <table align="center" border="1">
       <tr hidden>
         <th>AutoID</th>
         <th>Tootja</th>
@@ -21,6 +21,7 @@
         <td>{{row.regNo}}</td>
       </tr>
     </table>
+    <br>
     <button v-on:click="test2()">salvesta</button>
     <br><br>
     <table border="1" align="center">

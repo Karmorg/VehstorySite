@@ -37,21 +37,22 @@
         <td>{{row.year}}</td>
         <td>{{row.fuel}}</td>
         <td>{{row.kW}}</td>
-        <td><input v-model="row.odo" ></td>
+        <td><input size="5" maxlength="9" v-model="row.odo" ></td>
         <td><button v-on:click="updateOdo(index)" > Uuenda läbisõitu </button></td>
         <td><button v-on:click="goToServices(row.vehId)" > Hoolduste valik </button></td>
         <td><button v-on:click="goToDashboard(row.vehId)" > Töölauale </button></td>
+        <td><button v-on:click="goToHistory(row.vehId)" > Ajalugu </button></td>
         <td><button v-on:click="deleteRow(index)">Kustuta sõiduk</button></td>
       </tr>
       <tr>
-        <td><input placeholder="reg. nr" v-model="vehicle.regNo"></td>
-        <td><input placeholder="tüüp" v-model="vehicle.type"></td>
-        <td><input placeholder="tootja" v-model="vehicle.manufactorer"></td>
-        <td><input placeholder="mudel" v-model="vehicle.model"></td>
-        <td><input placeholder="aasta" v-model="vehicle.year"></td>
-        <td><input placeholder="kütus" v-model="vehicle.fuel"></td>
-        <td><input placeholder="kw" v-model="vehicle.kW"></td>
-        <td><input placeholder="läbisõit" v-model="vehicle.odo"></td>
+        <td><input size="5" maxlength="9" placeholder="reg. nr" v-model="vehicle.regNo"></td>
+        <td><input size="8" maxlength="12" placeholder="tüüp" v-model="vehicle.type"></td>
+        <td><input size="8" maxlength="20" placeholder="tootja" v-model="vehicle.manufactorer"></td>
+        <td><input size="8" maxlength="20" placeholder="mudel" v-model="vehicle.model"></td>
+        <td><input size="5" maxlength="4" placeholder="aasta" v-model="vehicle.year"></td>
+        <td><input size="8" maxlength="15" placeholder="kütus" v-model="vehicle.fuel"></td>
+        <td><input size="5" maxlength="4" placeholder="kw" v-model="vehicle.kW"></td>
+        <td><input size="5" maxlength="9" placeholder="läbisõit" v-model="vehicle.odo"></td>
         <td><button v-on:click="addVehicle()">Lisa sõiduk</button></td>
       </tr>
     </table>
@@ -99,6 +100,10 @@ let goToServices = function (vehId){
   this.$router.push({ name: 'TeenusteValimine', params: { vehId: vehId  }  })
 }
 
+let goToHistory = function (vehId){
+  this.$router.push({ name: 'Ajalugu', params: { vehId: vehId } })
+}
+
 let deleteRow = function (index){
   let url="http://localhost:8080/client/deleteVehicle?id=" + this.vehicleList[index].vehId;
   this.$http.put(url)
@@ -113,7 +118,8 @@ export default {
     updateOdo:updateOdo,
     addVehicle:addVehicle,
     goToDashboard:goToDashboard,
-    goToServices:goToServices
+    goToServices:goToServices,
+    goToHistory:goToHistory
   },
   data: function (){      //Data on ka Vue enda sisene funtsioon
     return {
