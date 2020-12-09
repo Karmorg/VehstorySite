@@ -1,5 +1,5 @@
 <template>
-  <div class="history">
+  <div>
     <h1>Ajalugu</h1>
     <br>
     <table align="center" border="1">
@@ -10,10 +10,10 @@
         <th>RegNr</th>
       </tr>
       <tr v-for="(row, index) in resultList1">
-        <td hidden>{{row.id}}</td>
-        <td>{{row.manufacturer}}</td>
-        <td>{{row.model}}</td>
-        <td>{{row.regNo}}</td>
+        <td hidden>{{ row.id }}</td>
+        <td>{{ row.manufacturer }}</td>
+        <td>{{ row.model }}</td>
+        <td>{{ row.regNo }}</td>
       </tr>
     </table>
     <br>
@@ -29,17 +29,17 @@
         <th>Staatus</th>
       </tr>
       <tr v-for="(row, index) in vehicleServisLog">
-        <td >{{row.id}}</td>
-        <td >{{row.logDate}}</td>
-        <td >{{row.vehicleId}}</td>
-        <td >{{row.serviceName}}</td>
-        <td >{{row.serviceName}}</td>
-        <td >{{row.serviceName}}</td>
+        <td>{{ row.id }}</td>
+        <td>{{ row.logDate }}</td>
+        <td>{{ row.vehicleId }}</td>
+        <td>{{ row.serviceName }}</td>
+        <td>{{ row.serviceDate }}</td>
+        <td>{{ row.serviceOdo }}</td>
+        <td>{{ row.comment }}</td>
+        <td>{{ row.active }}</td>
       </tr>
 
-
     </table>
-
 
 
   </div>
@@ -48,34 +48,37 @@
 
 
 <script>
-let getOneVehicle = function(vehId) {
-  let url="http://localhost:8080/client/oneVehicle?vehicleId="+vehId;
+let getOneVehicle = function (vehId) {
+  let url = "http://localhost:8080/client/oneVehicle?vehicleId=" + vehId;
 
-  this.resultList1=this.$http.get(url)
-      .then(result => this.resultList1=result.data)
+  this.resultList1 = this.$http.get(url)
+      .then(result => this.resultList1 = result.data)
 }
 let getVehicleServiceLog = function (vehId) {
-  this.$http.get("http://localhost:8080/vehicleServiceLog?vehicleId=" + vehId)
+  let url = "http://localhost:8080/vehicleServiceLog?vehicleId=8";
+
+  this.vehicleServiceLog = this.$http.get(url)
       .then(result => this.vehicleServiceLog = result.data);
 }
 
-  export default {
-    methods: {
-      getOneVehicle: getOneVehicle,
-      getVehicleServiceLog: getVehicleServiceLog
+export default {
+  methods: {
+    getOneVehicle: getOneVehicle,
+    getVehicleServiceLog: getVehicleServiceLog
 
-    },
-    data: function () {
-      return {
-        resultList1: [],
-        vehicleServiceLog: []
+  },
+  data: function () {
+    return {
+      resultList1: [],
+      vehicleServiceLog: []
 
-      }
-    },
-    created() {
-      this.getOneVehicle(this.$route.params.vehId)
-      this.getVehicleServiceLog(this.$route.params.vehid)
     }
+  },
+  created() {
+    this.getOneVehicle(this.$route.params.vehId)
+    this.getVehicleServiceLog(this.$route.params.vehid)
+
+  }
 }
 
 
