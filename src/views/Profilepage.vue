@@ -1,16 +1,13 @@
-<template>
-  <div class="profile_page">
-    <img alt="Vue logo" src="../assets/logo.png">
+<template xmlns="http://www.w3.org/1999/html">
+  <div class="Profilepage">
   </div>
-</template>
 
+</template>
 <template>
+
 
   <div>
-    <p> <input placeholder="Kliendi nr" v-model="vehicle.clientId">
-      Ajutine väli, kuni sisse logimine ei tööta.
-      <button v-on:click="getMyVehicles(vehicle.clientId)"> Vaheta klienti </button>
-    </p>
+    <p align="right"><button  v-on:click="logout()" > Logi välja </button></p>
 
     <h1>Minu sõidukid</h1>
 
@@ -61,8 +58,8 @@
 
 <script>
 
-let getMyVehicles = function (clientId){
-  this.$http.get(this.$host + "/client/myVehicles?clientId=" + clientId)
+let getMyVehicles = function (){
+  this.$http.get(this.$host + "/client/myVehicles")
       .then(response => this.vehicleList = response.data);
 }
 
@@ -72,7 +69,7 @@ let addVehicle = function (){
   this.$http.post(url, this.vehicle)
       .then(() => {
           alert("Sõiduk on lisatud. Alusta hoolduste valikuga.")
-          this.getMyVehicles(this.vehicle.clientId)
+          this.getMyVehicles()
           this.vehicle = {}})
       // .then(this.$router.push({ name: 'TeenusteValimine', params: { vehId: vehId  }  }))
   // .then(this.$router.push({ path: 'Profilepage' }))
@@ -86,10 +83,10 @@ let updateOdo = function (index){
   let body = {
     vehId: this.vehicleList[index].vehId,
     newOdoValue: this.vehicleList[index].odo
-
   }
   this.$http.put(url, body)
-      .then(alert("uuendatud"))
+      // .then(response => this.getMyVehicles)
+      .then(alert("Uuendatud"))
 }
 
 let goToDashboard = function (vehId){
@@ -107,8 +104,12 @@ let goToHistory = function (vehId){
 let deleteRow = function (index){
   let url=this.$host + "/client/deleteVehicle?id=" + this.vehicleList[index].vehId;
   this.$http.put(url)
-      .then(alert("Sõiduk kustutatud"))
       .then(this.vehicleList.splice(index, 1))
+}
+let logout = function (){
+  localStorage.removeItem('user-token')
+  this.$router.push({path: '/'})
+  location.reload()
 }
 
 export default {
@@ -119,7 +120,8 @@ export default {
     addVehicle:addVehicle,
     goToDashboard:goToDashboard,
     goToServices:goToServices,
-    goToHistory:goToHistory
+    goToHistory:goToHistory,
+    logout
   },
   data: function (){      //Data on ka Vue enda sisene funtsioon
     return {
@@ -128,8 +130,8 @@ export default {
     }
   },
   created() {
-    this.vehicle.clientId = 1
-    this.getMyVehicles(this.vehicle.clientId)
+    // this.vehicle.clientId = 1
+    this.getMyVehicles()
      //Selle created meetodi tõmbab Vue alati esimesena tööle
   }
 }

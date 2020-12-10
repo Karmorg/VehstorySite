@@ -1,19 +1,79 @@
-<template>
+<template id="logo">
+
   <div class="home">
+    <h1>Vehstory</h1>
+    <h2>Sõidukite hoolduse ajalugu</h2>
     <img alt="Vue logo" src="../assets/logo.png">
-      </div>
+    <p>
+      <input placeholder="Sisesta nimi" v-model="client.name">
+      <br>
+      <br>
+      <input placeholder="Sisesta email" v-model="client.eMail">
+      <br>
+      <br>
+      <input type="password" placeholder="Sisesta parool" v-model="client.password">
+    </p>
+    <br>
+    <button v-on:click="createAccount()"> Registreeri </button>      <button v-on:click="login()"> Logi sisse </button>
+    <br>
+    <br>
+    <button v-on:click="logout()"> Logi välja </button>
+    <br>  <br>
+    <br>
+    <!--    <button v-on:click="addRow"> Lisa rida </button>-->
+  </div>
 </template>
+
+
 
 <script>
 
+// let addRow = function (){
+//   this.vehicleList.push({});
+// }
 
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+let createAccountFunction = function () {
+  let url = this.$host + "/public/register";
+  let config = {
+    params: {}
+  }
+  this.$http.post(url, this.client)
+      // .then(this.showResponse)
+      // .then(alert("Oled registreeritud kasutajaks"))
+    .then(this.login())
+}
+
+let login = function (){
+  let url = this.$host + "/public/login"
+  this.$http.post(url, this.client).
+  then(response => {
+    let token = response.data;
+    localStorage.setItem('user-token', token)
+    this.$http.defaults.headers.common['Authorization'] = "Bearer " + token
+    this.$router.push( {path: "Profilepage"})
+  })
+  // .then(response => this.reply = response.data)
+  // .then(alert(this.reply));
+}
+
+let logout = function (){
+  localStorage.removeItem('user-token')
+  location.reload()
+}
 
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
+  methods: {
+    createAccount: createAccountFunction,
+    login:login,
+    logout:logout
+  },
+  data: function (){      //Data on ka Vue enda sisene funtsioon
+    return {
+      vehicleList: [],
+      client: {}
+    }
+  },
+  created() {    //Selle created meetodi tõmbab Vue alati esimesena tööle
   }
 }
 </script>

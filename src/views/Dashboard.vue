@@ -7,10 +7,10 @@
 <template>
 
   <div>
-    <p> <input placeholder="Sõiduki nr" v-model="vehicle.vehId">
-      Ajutine väli peab hoolduste sisestamiseks olema täidetd. Kuni sisse logimine ei tööta. </p>
-    <button v-on:click="getVehicleSelectedServices(vehicle.vehId)" > Vaheta sõidukit </button>
-    <br><br>
+<!--    <p> <input placeholder="Sõiduki nr" v-model="vehicle.vehId">-->
+<!--      Ajutine väli peab hoolduste sisestamiseks olema täidetd. Kuni sisse logimine ei tööta. </p>-->
+<!--    <button v-on:click="getVehicleSelectedServices(vehicle.vehId)" > Vaheta sõidukit </button>-->
+<!--    <br><br>-->
 
     <h1>Töölaud</h1>
 
@@ -86,7 +86,7 @@ let getVehicleSelectedServices = function (vehicleId){
 let addServiceLog = function (){
   let url = "http://localhost:8080/client/addServiceLog"
   this.$http.post(url, this.vehicleSelectedServiceList)
-  .then(alert("kanded ajaloos"))
+    .then(response =>this.getVehicleSelectedServices(this.vehicle.vehId));
 
 }
 
