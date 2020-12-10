@@ -42,7 +42,7 @@
         <td hidden>{{ row.id }}</td>
         <td hidden>{{ row.vehicleId }}</td>
         <td>{{ row.serviceName }}</td>
-        <td><span>{{ row.pUnit }}</span><select v-model="row.pUnit">
+        <td><span hidden>{{ row.pUnit }}</span><select v-model="row.pUnit">
           <option>km</option>
           <option>aasta</option>
           <option>kontrollida</option>
