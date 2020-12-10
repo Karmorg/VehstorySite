@@ -22,7 +22,7 @@
       </tr>
     </table>
     <br>
-    <button v-on:click="test2()">salvesta/töölauale</button>
+    <button v-on:click="test2()">salvesta ja mine töölauale</button>
     <br><br>
     <table border="1" align="center">
       <tr>
@@ -78,7 +78,9 @@ let test2 = function () {
   let url = this.$host + "/client/updateSelectedService";
 
   this.$http.put(url, this.resultList)
-      .then(this.$router.push({ name: 'Dashboard', params: { vehId: this.$route.params.vehId } }))
+    .then(()=> {
+      this.$router.push({ name: 'Dashboard', params: { vehId: this.$route.params.vehId } })
+  })
 }
 
 export default {

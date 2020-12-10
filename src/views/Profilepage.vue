@@ -82,10 +82,10 @@ let updateOdo = function (index){
   let body = {
     vehId: this.vehicleList[index].vehId,
     newOdoValue: this.vehicleList[index].odo
-
   }
   this.$http.put(url, body)
-      .then(alert("uuendatud"))
+      // .then(response => this.getMyVehicles)
+      .then(alert("Uuendatud"))
 }
 
 let goToDashboard = function (vehId){
@@ -103,7 +103,6 @@ let goToHistory = function (vehId){
 let deleteRow = function (index){
   let url=this.$host + "/client/deleteVehicle?id=" + this.vehicleList[index].vehId;
   this.$http.put(url)
-      .then(alert("Sõiduk kustutatud"))
       .then(this.vehicleList.splice(index, 1))
 }
 let logout = function (){
