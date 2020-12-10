@@ -22,7 +22,7 @@
       </tr>
     </table>
     <br>
-    <button v-on:click="test2()">salvesta</button>
+    <button v-on:click="test2()">salvesta/töölauale</button>
     <br><br>
     <table border="1" align="center">
       <tr>
