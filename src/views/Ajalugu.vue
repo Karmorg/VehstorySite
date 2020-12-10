@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h5>Ajalugu</h5>
+    <h1>Ajalugu</h1>
     <br>
     <table align="center" border="1">
       <tr hidden>

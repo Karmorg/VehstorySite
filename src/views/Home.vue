@@ -1,5 +1,8 @@
 <template id="logo">
+
   <div class="home">
+    <h1>Vehstory</h1>
+    <h2>Sõidukite hoolduse ajalugu</h2>
     <img alt="Vue logo" src="../assets/logo.png">
     <p>
       <input placeholder="Sisesta nimi" v-model="client.name">

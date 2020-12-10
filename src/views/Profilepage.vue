@@ -5,6 +5,7 @@
 </template>
 <template>
 
+
   <div>
     <p align="right"><button  v-on:click="logout()" > Logi välja </button></p>
 
@@ -107,8 +108,8 @@ let deleteRow = function (index){
 }
 let logout = function (){
   localStorage.removeItem('user-token')
-  // location.reload()
   this.$router.push({path: '/'})
+  location.reload()
 }
 
 export default {
