@@ -1,6 +1,6 @@
 <template>
   <div class="register">
-    <img alt="Vue logo" src="../assets/logo.png">
+
     <img src="">
   </div>
 
@@ -25,6 +25,7 @@
     <br>  <br>
     <br>
 <!--    <button v-on:click="addRow"> Lisa rida </button>-->
+    <img alt="Vue logo" src="../assets/logo.png">
   </div>
 </template>
 
