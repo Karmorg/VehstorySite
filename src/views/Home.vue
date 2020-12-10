@@ -14,16 +14,16 @@
       <input type="password" placeholder="Sisesta parool" v-model="client.password">
     </p>
     <br>
-    <button v-on:click="createAccount()"> Registreeri </button>      <button v-on:click="login()"> Logi sisse </button>
+    <button v-on:click="createAccount()"> Registreeri</button>
+    <button v-on:click="login()"> Logi sisse</button>
     <br>
     <br>
-    <button v-on:click="logout()"> Logi välja </button>
-    <br>  <br>
+    <button v-on:click="logout()"> Logi välja</button>
+    <br> <br>
     <br>
     <!--    <button v-on:click="addRow"> Lisa rida </button>-->
   </div>
 </template>
-
 
 
 <script>
@@ -34,29 +34,38 @@
 
 let createAccountFunction = function () {
   let url = this.$host + "/public/register";
-  let config = {
-    params: {}
-  }
+  // let config = {
+  //   params: {}
+  // }
   this.$http.post(url, this.client)
       // .then(this.showResponse)
       // .then(alert("Oled registreeritud kasutajaks"))
-    .then(this.login())
+      .then(this.login())
 }
 
-let login = function (){
+let login = function () {
   let url = this.$host + "/public/login"
-  this.$http.post(url, this.client).
-  then(response => {
-    let token = response.data;
-    localStorage.setItem('user-token', token)
-    this.$http.defaults.headers.common['Authorization'] = "Bearer " + token
-    this.$router.push( {path: "Profilepage"})
-  })
+  this.$http.post(url, this.client)
+      .then(response => {
+        let token = response.data;
+        localStorage.setItem('user-token', token)
+        this.$http.defaults.headers.common['Authorization'] = "Bearer " + token
+        this.$router.push({path: "Profilepage"})
+      }).catch(error => {
+        if (error.response.status == 400) {
+          alert(error.response.data.message)
+        }if (error.response.status == 500){
+          alert("Palun täida kõik väljad!")
+
+    }
+      })
   // .then(response => this.reply = response.data)
   // .then(alert(this.reply));
+
+
 }
 
-let logout = function (){
+let logout = function () {
   localStorage.removeItem('user-token')
   location.reload()
 }
@@ -64,10 +73,10 @@ let logout = function (){
 export default {
   methods: {
     createAccount: createAccountFunction,
-    login:login,
-    logout:logout
+    login: login,
+    logout: logout
   },
-  data: function (){      //Data on ka Vue enda sisene funtsioon
+  data: function () {      //Data on ka Vue enda sisene funtsioon
     return {
       vehicleList: [],
       client: {}
