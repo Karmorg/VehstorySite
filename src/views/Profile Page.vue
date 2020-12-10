@@ -61,8 +61,8 @@
 
 <script>
 
-let getMyVehicles = function (clientId){
-  this.$http.get(this.$host + "/client/myVehicles?clientId=" + clientId)
+let getMyVehicles = function (){
+  this.$http.get(this.$host + "/client/myVehicles")
       .then(response => this.vehicleList = response.data);
 }
 
@@ -128,8 +128,8 @@ export default {
     }
   },
   created() {
-    this.vehicle.clientId = 1
-    this.getMyVehicles(this.vehicle.clientId)
+    this.vehicle.clientId
+    this.getMyVehicles()
      //Selle created meetodi tõmbab Vue alati esimesena tööle
   }
 }
