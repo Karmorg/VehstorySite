@@ -2,7 +2,6 @@
   <div id="app">
     <div id="nav">
       <router-link to="/Profilepage">Minu sõidukid</router-link>
-<!--      <router-link to="/Admin">Admin</router-link>-->
     </div>
     <router-view/>
   </div>

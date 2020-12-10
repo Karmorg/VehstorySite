@@ -2,9 +2,10 @@
   <div>
     <h1>Ajalugu</h1>
     <br>
-    <table align="center" border="1">
-      <tr hidden>
-        <th>AutoID</th>
+    <table border="1" align="center">
+      <caption>Sõiduki andmed</caption>
+      <tr>
+        <th hidden>AutoID</th>
         <th>Tootja</th>
         <th>Mudel</th>
         <th>RegNr</th>
@@ -17,7 +18,8 @@
       </tr>
     </table>
     <br>
-    <table align="center" border="1">
+    <table border="1" align="center">
+      <caption>Tehtud hooldused</caption>
       <tr>
         <th>Nr</th>
         <th hidden>ID</th>

@@ -77,15 +77,11 @@ let addVehicle = function (){
 
 let updateOdo = function (index){
   let url = this.$host + "/client/updateOdo";
-  let config = {    //selle osa võib ka ära jätta
-    params: {}
-  }
   let body = {
     vehId: this.vehicleList[index].vehId,
     newOdoValue: this.vehicleList[index].odo
   }
   this.$http.put(url, body)
-      // .then(response => this.getMyVehicles)
       .then(alert("Uuendatud"))
 }
 
@@ -130,9 +126,7 @@ export default {
     }
   },
   created() {
-    // this.vehicle.clientId = 1
     this.getMyVehicles()
-     //Selle created meetodi tõmbab Vue alati esimesena tööle
   }
 }
 </script>

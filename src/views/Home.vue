@@ -21,26 +21,17 @@
     <button v-on:click="logout()"> Logi välja</button>
     <br> <br>
     <br>
-    <!--    <button v-on:click="addRow"> Lisa rida </button>-->
   </div>
 </template>
 
 
 <script>
 
-// let addRow = function (){
-//   this.vehicleList.push({});
-// }
-
 let createAccountFunction = function () {
   let url = this.$host + "/public/register";
-  // let config = {
-  //   params: {}
-  // }
+
   this.$http.post(url, this.client)
-      // .then(this.showResponse)
-      // .then(alert("Oled registreeritud kasutajaks"))
-      .then(this.login())
+      .then( response => this.login())
 }
 
 let login = function () {
@@ -54,15 +45,10 @@ let login = function () {
       }).catch(error => {
         if (error.response.status == 400) {
           alert(error.response.data.message)
-        }if (error.response.status == 500){
+        }else if (error.response.status == 500){
           alert("Palun täida kõik väljad!")
-
     }
       })
-  // .then(response => this.reply = response.data)
-  // .then(alert(this.reply));
-
-
 }
 
 let logout = function () {

@@ -14,7 +14,8 @@
 
     <h1>Töölaud</h1>
 
-    <table border="1">
+    <table border="1" align="center">
+      <caption>Sõiduki andmed</caption>
       <tr >
         <th hidden>AutoID</th>
         <th>Tootja</th>
@@ -28,13 +29,14 @@
         <td>{{row.regNo}}</td>
       </tr>
     </table>
-
+    <br><br>
     <button v-on:click="goToServices(vehicle.vehId)" > Lisa hooldusi </button>
     <button v-on:click="addServiceLog()" > Sisesta hooldused logisse </button>
 
     <br> <br>
 
     <table border="1" align="center">
+      <caption>Sõiduki hoolduste ajalugu</caption>
       <tr>
         <th hidden>Id</th>
         <th>Töö nr</th>

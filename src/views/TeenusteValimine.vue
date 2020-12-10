@@ -7,9 +7,10 @@
       <p align="left">
       </p>
     </header>
-    <table align="center" border="1">
-      <tr hidden>
-        <th>AutoID</th>
+    <table border="1" align="center">
+      <caption>Sõiduki andmed</caption>
+      <tr>
+        <th hidden>AutoID</th>
         <th>Tootja</th>
         <th>Mudel</th>
         <th>RegNr</th>
@@ -25,6 +26,7 @@
     <button v-on:click="test2()">salvesta ja mine töölauale</button>
     <br><br>
     <table border="1" align="center">
+      <caption>Sõiduki töölaual nähtavate hoolduste valik ning välpade määramine</caption>
       <tr>
         <th width="30"></th>
         <th hidden width="30">ID</th>
