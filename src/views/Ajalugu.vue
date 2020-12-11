@@ -52,13 +52,13 @@
 
 <script>
 let getOneVehicle = function (vehId) {
-  let url = "http://localhost:8080/client/oneVehicle?vehicleId=" + vehId;
+  let url = this.$host + "/client/oneVehicle?vehicleId=" + vehId;
 
   this.resultList1 = this.$http.get(url)
       .then(result => this.resultList1 = result.data)
 }
 let getVehicleServiceLog = function (vehId) {
-  let url = "http://localhost:8080/client/vehicleServiceLog?vehicleId=" +vehId;
+  let url = this.$host + "/client/vehicleServiceLog?vehicleId=" +vehId;
 
   this.vehicleServiceLog = this.$http.get(url)
       .then(result => this.vehicleServiceLog = result.data);
