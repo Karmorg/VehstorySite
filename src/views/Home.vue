@@ -3,7 +3,7 @@
   <div class="home">
     <h1>Vehstory</h1>
     <h2>Sõidukite hoolduse ajalugu</h2>
-    <img alt="Vue logo" src="../assets/logo.png">
+
     <p>
       <input placeholder="Sisesta nimi" v-model="client.name">
       <br>
@@ -21,6 +21,7 @@
     <button v-on:click="logout()"> Logi välja</button>
     <br> <br>
     <br>
+    <img alt="Vue logo" src="../assets/logo.png">
   </div>
 </template>
 
@@ -31,7 +32,13 @@ let createAccountFunction = function () {
   let url = this.$host + "/public/register";
 
   this.$http.post(url, this.client)
-      .then( response => this.login())
+      .then(response => this.login())
+      .catch(error => {
+            if (error.response.status == 400) {
+              alert(error.response.data.message)
+            }
+          }
+      )
 }
 
 let login = function () {
@@ -43,12 +50,12 @@ let login = function () {
         this.$http.defaults.headers.common['Authorization'] = "Bearer " + token
         this.$router.push({path: "Profilepage"})
       }).catch(error => {
-        if (error.response.status == 400) {
-          alert(error.response.data.message)
-        }else if (error.response.status == 500){
-          alert("Palun täida kõik väljad!")
+    if (error.response.status == 400) {
+      alert(error.response.data.message)
+    } else if (error.response.status == 500) {
+      alert("Palun täida kõik väljad!")
     }
-      })
+  })
 }
 
 let logout = function () {
