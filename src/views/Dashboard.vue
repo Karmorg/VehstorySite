@@ -74,26 +74,26 @@
 <script>
 
 let getOneVehicle = function(vehId) {
-  let url="http://localhost:8080/client/oneVehicle?vehicleId="+vehId;
+  let url=this.$host + "/client/oneVehicle?vehicleId="+vehId;
 
   this.resultList1=this.$http.get(url)
       .then(result => this.resultList1=result.data)
 }
 
 let getVehicleSelectedServices = function (vehicleId){
-  this.$http.get("http://localhost:8080/client/VehicleSelectedServiceListDashboard?vehicleId=" + vehicleId)
+  this.$http.get(this.$host + "/client/VehicleSelectedServiceListDashboard?vehicleId=" + vehicleId)
       .then(response => this.vehicleSelectedServiceList = response.data);
 }
 
 let addServiceLog = function (){
-  let url = "http://localhost:8080/client/addServiceLog"
+  let url = this.$host + "/client/addServiceLog"
   this.$http.post(url, this.vehicleSelectedServiceList)
     .then(response =>this.getVehicleSelectedServices(this.vehicle.vehId));
 
 }
 
 let updateOdo = function (index) {
-  let url = "http://localhost:8080/client/updateOdo";
+  let url = this.$host + "/client/updateOdo";
 
   let body = {
     vehId: this.vehicleSelectedServiceList[index].vehId,
