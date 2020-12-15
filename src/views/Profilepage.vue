@@ -7,8 +7,6 @@
 
 
   <div>
-    <p align="right"><button  v-on:click="logout()" > Logi välja </button></p>
-
     <h1>Minu sõidukid</h1>
 
     <table border="1" align="center">
@@ -53,6 +51,7 @@
         <td><button v-on:click="addVehicle()">Lisa sõiduk</button></td>
       </tr>
     </table>
+    <p><button  v-on:click="logout()" > Logi välja </button></p>
   </div>
 </template>
 

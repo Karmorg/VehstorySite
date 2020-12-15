@@ -1,6 +1,5 @@
 <template>
   <div class="Dashboard">
-
   </div>
 </template>
 
@@ -13,7 +12,6 @@
 <!--    <br><br>-->
 
     <h1>Sõiduki töölaud</h1>
-
     <table border="1" align="center">
       <caption>Sõiduki andmed</caption>
       <tr >
@@ -68,6 +66,10 @@
         <td bgcolor="#ffe4c4"><input v-model="row.comment" style="background: bisque"></td>
       </tr>
     </table>
+    <br><br>
+    <button v-on:click="myVehicles()">Minu sõidukid</button>
+    <button v-on:click="toServiceLog(vehicle.vehId)">Sõiduki hoolduste ajalugu</button>
+    <button v-on:click="logOut()">Logi välja</button>
   </div>
 </template>
 
@@ -114,6 +116,17 @@ let deleteRow = function (index){
       .then(alert("Sõiduk kustutatud"))
       .then(this.vehicleList.splice(index, 1))
 }
+let myVehicles = function (){
+  this.$router.push({path: "/Profilepage"})
+}
+let toServiceLog = function (vehId){
+  this.$router.push({ name: 'Ajalugu', params: { vehId: vehId  }  })
+}
+let logOut = function () {
+  localStorage.removeItem('user-token')
+  this.$router.push({path: '/'})
+  location.reload()
+}
 
 export default {
   methods: {
@@ -123,7 +136,9 @@ export default {
     updateOdo:updateOdo,
     addServiceLog,
     goToServices,
-
+    myVehicles,
+    toServiceLog,
+    logOut
   },
   data: function (){      //Data on ka Vue enda sisene funtsioon
     return {

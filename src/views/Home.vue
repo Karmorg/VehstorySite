@@ -54,17 +54,10 @@ let login = function () {
     }
   })
 }
-
-let logout = function () {
-  localStorage.removeItem('user-token')
-  location.reload()
-}
-
 export default {
   methods: {
     createAccount: createAccountFunction,
-    login: login,
-    logout: logout
+    login: login
   },
   data: function () {      //Data on ka Vue enda sisene funtsioon
     return {
@@ -72,7 +65,7 @@ export default {
       client: {}
     }
   },
-  created() {    //Selle created meetodi tõmbab Vue alati esimesena tööle
+  created() {
   }
 }
 </script>

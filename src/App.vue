@@ -1,11 +1,24 @@
 <template >
   <div id="app">
     <div id="nav">
-      <router-link to="/Profilepage">Minu sõidukid</router-link>
+<!--      <router-link v-if="token" to="/Profilepage">Minu sõidukid</router-link>-->
     </div>
     <router-view/>
   </div>
 </template>
+
+<script>
+export default {
+  data(){
+    return {
+      token: ''
+    }
+  },
+  created() {
+    this.token = localStorage.getItem('user-token')
+  }
+}
+</script>
 
 <style>
 #app {

@@ -43,7 +43,10 @@
         <td hidden>{{ row.active }}</td>
       </tr>
     </table>
-
+    <br><br>
+    <button v-on:click="myVehicles()">Minu sõidukid</button>
+    <button v-on:click="toSelectedServices()">Sõiduki töölauale</button>
+    <button v-on:click="logOut()">Logi välja</button>
 
   </div>
 
@@ -63,24 +66,38 @@ let getVehicleServiceLog = function (vehId) {
   this.vehicleServiceLog = this.$http.get(url)
       .then(result => this.vehicleServiceLog = result.data);
 }
+let myVehicles = function (){
+  this.$router.push({path: "/Profilepage"})
+}
+let toSelectedServices = function (){
+  // this.$router.push({ name: 'Dashboard', params: { vehId: vehId  }  })
+  this.$router.push({ name: 'Dashboard', params: { vehId: this.$route.params.vehId } })
+}
+let logOut = function () {
+  localStorage.removeItem('user-token')
+  this.$router.push({path: '/'})
+  location.reload()
+}
 
 export default {
   methods: {
     getOneVehicle: getOneVehicle,
-    getVehicleServiceLog: getVehicleServiceLog
-
+    getVehicleServiceLog: getVehicleServiceLog,
+    myVehicles,
+    toSelectedServices,
+    logOut
   },
   data: function () {
     return {
       resultList1: [],
-      vehicleServiceLog: []
-
+      vehicleServiceLog: [],
+      vehicleId: ""
     }
   },
   created() {
+    // this.vehicleId = this.$route.params.vehId
     this.getOneVehicle(this.$route.params.vehId)
     this.getVehicleServiceLog(this.$route.params.vehId)
-
   }
 }
 

@@ -55,10 +55,13 @@
 
       </tr>
     </table>
+    <br><br>
+    <button v-on:click="myVehicles()">Minu sõidukid</button>
+    <button v-on:click="toServiceLog()">Sõiduki hoolduste ajalugu</button>
+    <button v-on:click="logOut()">Logi välja</button>
     <br>
     <img alt="Vue logo" src="../assets/logo.png">
-    <br>
-    <br><br><br><br>
+
   </div>
 </template>
 
@@ -86,12 +89,26 @@ let test2 = function () {
       this.$router.push({ name: 'Dashboard', params: { vehId: this.$route.params.vehId } })
   })
 }
+let myVehicles = function (){
+  this.$router.push({path: "/Profilepage"})
+}
+let toServiceLog = function (){
+  this.$router.push({ name: 'Ajalugu', params: { vehId: this.$route.params.vehId }  })
+}
+let logOut = function () {
+  localStorage.removeItem('user-token')
+  this.$router.push({path: '/'})
+  location.reload()
+}
 
 export default {
   methods: {
     getData: getData,
     test2: test2,
-    getOneVehicle:getOneVehicle
+    getOneVehicle:getOneVehicle,
+    myVehicles,
+    toServiceLog,
+    logOut
   },
   data: function () {
     return {
