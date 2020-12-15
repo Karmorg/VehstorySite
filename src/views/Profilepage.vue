@@ -21,7 +21,7 @@
         <th>Mudel</th>
         <th>Aastakäik</th>
         <th>Kütus</th>
-        <th>Mootori võimsus, kW</th>
+        <th>Võimsus, kW</th>
         <th>Läbisõit</th>
       </tr>
       <tr v-for="(row, index) in vehicleList">
@@ -48,8 +48,8 @@
         <td><input size="8" maxlength="20" placeholder="mudel" v-model="vehicle.model"></td>
         <td><input size="5" maxlength="4" placeholder="aasta" v-model="vehicle.year"></td>
         <td><input size="8" maxlength="15" placeholder="kütus" v-model="vehicle.fuel"></td>
-        <td><input size="5" maxlength="4" placeholder="kw" v-model="vehicle.kW"></td>
-        <td><input size="5" maxlength="9" placeholder="läbisõit" v-model="vehicle.odo"></td>
+        <td><input type="number" size="5" maxlength="4" placeholder="kw" v-model="vehicle.kW"></td>
+        <td><input type="number" size="5" maxlength="9" placeholder="läbisõit" v-model="vehicle.odo"></td>
         <td><button v-on:click="addVehicle()">Lisa sõiduk</button></td>
       </tr>
     </table>

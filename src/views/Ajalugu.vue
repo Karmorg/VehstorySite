@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Ajalugu</h1>
+    <h1>Hoolduste ajalugu</h1>
     <br>
     <table border="1" align="center">
       <caption>Sõiduki andmed</caption>
@@ -12,14 +12,14 @@
       </tr>
       <tr v-for="(row, index) in resultList1">
         <td hidden>{{ row.id }}</td>
-        <th bgcolor="#7fffd4" width="60">{{ row.manufacturer }}</th>
+        <th width="60">{{ row.manufacturer }}</th>
         <td width="60">{{ row.model }}</td>
         <td width="60">{{ row.regNo }}</td>
       </tr>
     </table>
     <br>
     <table border="1" align="center">
-      <caption>Tehtud hooldused</caption>
+      <caption>Teostatud hooldused</caption>
       <tr>
         <th>Nr</th>
         <th hidden>ID</th>

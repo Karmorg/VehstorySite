@@ -12,7 +12,7 @@
 <!--    <button v-on:click="getVehicleSelectedServices(vehicle.vehId)" > Vaheta sõidukit </button>-->
 <!--    <br><br>-->
 
-    <h1>Töölaud</h1>
+    <h1>Sõiduki töölaud</h1>
 
     <table border="1" align="center">
       <caption>Sõiduki andmed</caption>
@@ -30,42 +30,42 @@
       </tr>
     </table>
     <br><br>
-    <button v-on:click="goToServices(vehicle.vehId)" > Lisa hooldusi </button>
-    <button v-on:click="addServiceLog()" > Sisesta hooldused logisse </button>
+    <button v-on:click="goToServices(vehicle.vehId)" style="background: #f5f5dc" >Lisa allolevasse nimekirja hooldusi, mida soovid jälgida</button>
+    <button v-on:click="addServiceLog()" style="background: bisque">Sisesta teostatud hooldus(ed) hoolduste ajalukku</button>
 
     <br> <br>
 
     <table border="1" align="center">
-      <caption>Sõiduki hoolduste ajalugu</caption>
+      <caption>Viimased hooldused</caption>
       <tr>
         <th hidden>Id</th>
-        <th>Töö nr</th>
-        <th>Hooldus/töö</th>
-        <th>Sõiduki nr</th>
-        <th>Välba ühik</th>
-        <th>Välba väärtus</th>
+        <th hidden>Töö nr</th>
+        <th bgcolor="#f5f5dc">Hooldus/töö</th>
+        <th bgcolor="#f5f5dc">Sõiduki nr</th>
+        <th bgcolor="#f5f5dc">Välba ühik</th>
+        <th bgcolor="#f5f5dc">Välba väärtus</th>
         <th>Eelmine kp</th>
         <th>Eelmine odo</th>
         <th>Järgmine kp</th>
         <th>Järgmine odo</th>
-        <th>Teostatud kp</th>
-        <th>Teostatud odo</th>
-        <th>Märkus</th>
+        <th bgcolor="#ffe4c4">Teostatud kp</th>
+        <th bgcolor="#ffe4c4">Teostatud odo</th>
+        <th bgcolor="#ffe4c4">Märkus</th>
       </tr>
       <tr v-for="(row, index) in vehicleSelectedServiceList">
         <td hidden>{{index+1}}</td>
-        <td>{{row.serviceId}}</td>
-        <td>{{row.serviceName}}</td>
-        <td>{{row.vehicleId}}</td>
-        <td>{{row.pUnit}}</td>
-        <td>{{row.pValue}}</td>
+        <td hidden>{{row.serviceId}}</td>
+        <td bgcolor="#f5f5dc">{{row.serviceName}}</td>
+        <td bgcolor="#f5f5dc">{{row.vehicleId}}</td>
+        <td bgcolor="#f5f5dc">{{row.pUnit}}</td>
+        <td bgcolor="#f5f5dc">{{row.pValue}}</td>
         <td>{{row.lastSDate}}</td>
         <td>{{row.lastSOdo}}</td>
         <td>{{row.nextSDate}}</td>
         <td>{{row.nextSOdo}}</td>
-        <td><input type="date" v-model="row.serviceDate" ></td>
-        <td><input v-model="row.serviceOdo" ></td>
-        <td><input v-model="row.comment" ></td>
+        <td bgcolor="#ffe4c4"><input type="date" v-model="row.serviceDate" style="background: bisque" ></td>
+        <td bgcolor="#ffe4c4"><input type="number" v-model="row.serviceOdo" style="background: bisque"></td>
+        <td bgcolor="#ffe4c4"><input v-model="row.comment" style="background: bisque"></td>
       </tr>
     </table>
   </div>

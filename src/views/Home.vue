@@ -2,11 +2,9 @@
 
   <div class="home">
     <h1>Vehstory</h1>
-    <h2>Sõidukite hoolduse ajalugu</h2>
+    <h2>Minu sõidukite hoolduste ajalugu</h2>
 
     <p>
-      <input placeholder="Sisesta nimi" v-model="client.name">
-      <br>
       <br>
       <input placeholder="Sisesta email" v-model="client.eMail">
       <br>
@@ -17,10 +15,7 @@
     <button v-on:click="createAccount()"> Registreeri</button>
     <button v-on:click="login()"> Logi sisse</button>
     <br>
-    <br>
-    <button v-on:click="logout()"> Logi välja</button>
-    <br> <br>
-    <br>
+
     <img alt="Vue logo" src="../assets/logo.png">
   </div>
 </template>
@@ -36,6 +31,7 @@ let createAccountFunction = function () {
       .catch(error => {
             if (error.response.status == 400) {
               alert(error.response.data.message)
+              location.reload()
             }
           }
       )
@@ -52,8 +48,9 @@ let login = function () {
       }).catch(error => {
     if (error.response.status == 400) {
       alert(error.response.data.message)
+      location.reload()
     } else if (error.response.status == 500) {
-      alert("Palun täida kõik väljad!")
+      alert("Serveri koodi annab veel paremaks teha")
     }
   })
 }

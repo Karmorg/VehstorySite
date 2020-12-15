@@ -1,8 +1,7 @@
 <template>
   <div>
-    <h1>Teenuste valimine</h1>
-    <img alt="Vue logo" src="../assets/logo.png">
-    <br>
+    <h1>Hoolduste valik</h1>
+
     <header>
       <p align="left">
       </p>
@@ -49,13 +48,16 @@
           <option>aasta</option>
           <option>kontrollida</option>
         </select></td>
-        <td><input v-model="row.pValue"></td>
+        <td><input type="number" v-model="row.pValue"></td>
         <td><input v-model="row.comment"></td>
         <td><input type="checkbox" id="checkbox" v-model="row.active">
           <label hidden for="checkbox">{{ row.active }}</label></td>
 
       </tr>
     </table>
+    <br>
+    <img alt="Vue logo" src="../assets/logo.png">
+    <br>
     <br><br><br><br>
   </div>
 </template>
