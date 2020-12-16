@@ -40,14 +40,14 @@
         <td><button v-on:click="deleteRow(index)">Kustuta sõiduk</button></td>
       </tr>
       <tr>
-        <td><input size="5" maxlength="9" placeholder="reg. nr" v-model="vehicle.regNo"></td>
-        <td><input size="8" maxlength="12" placeholder="tüüp" v-model="vehicle.type"></td>
-        <td><input size="8" maxlength="20" placeholder="tootja" v-model="vehicle.manufactorer"></td>
-        <td><input size="8" maxlength="20" placeholder="mudel" v-model="vehicle.model"></td>
-        <td><input size="5" maxlength="4" placeholder="aasta" v-model="vehicle.year"></td>
-        <td><input size="8" maxlength="15" placeholder="kütus" v-model="vehicle.fuel"></td>
-        <td><input type="number" size="5" maxlength="4" placeholder="kw" v-model="vehicle.kW"></td>
-        <td><input type="number" size="5" maxlength="9" placeholder="läbisõit" v-model="vehicle.odo"></td>
+        <td><input size="5" maxlength="9" placeholder="reg. nr*" v-model="vehicle.regNo"></td>
+        <td><input size="8" maxlength="12" placeholder="tüüp*" v-model="vehicle.type"></td>
+        <td><input size="8" maxlength="20" placeholder="tootja*" v-model="vehicle.manufactorer"></td>
+        <td><input size="8" maxlength="20" placeholder="mudel*" v-model="vehicle.model"></td>
+        <td><input size="5" maxlength="4" placeholder="aasta*" v-model="vehicle.year"></td>
+        <td><input size="8" maxlength="15" placeholder="kütus*" v-model="vehicle.fuel"></td>
+        <td><input type="number" size="5" maxlength="4" placeholder="kw*" v-model="vehicle.kW"></td>
+        <td><input type="number" size="5" maxlength="9" placeholder="läbisõit*" v-model="vehicle.odo"></td>
         <td><button v-on:click="addVehicle()">Lisa sõiduk</button></td>
       </tr>
     </table>

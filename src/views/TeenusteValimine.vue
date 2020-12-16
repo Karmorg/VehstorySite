@@ -31,10 +31,10 @@
         <th hidden width="30">ID</th>
         <th hidden width="30">AutoID</th>
         <th>Teenus</th>
-        <th>Välba ühik</th>
+        <th>Välba ühik*</th>
         <th>Välba väärtus</th>
         <th>Märkus</th>
-                <th>Valitud</th>
+        <th>Valitud*</th>
 
 
       </tr>

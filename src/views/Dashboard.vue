@@ -50,7 +50,7 @@
         <th>Eelmine odo</th>
         <th>Järgmine kp</th>
         <th>Järgmine odo</th>
-        <th bgcolor="#ffe4c4">Teostatud kp</th>
+        <th bgcolor="#ffe4c4">Teostatud kp*</th>
         <th bgcolor="#ffe4c4">Teostatud odo</th>
         <th bgcolor="#ffe4c4">Märkus</th>
       </tr>
