@@ -61,7 +61,7 @@
 <script>
 
 let getAllVehicles = function (){
-  this.$http.get(this.$host + "/public/allVehicles")
+  this.$http.get(this.$host + "/client/allVehicles")
       .then(response => this.vehicleList = response.data);
 }
 

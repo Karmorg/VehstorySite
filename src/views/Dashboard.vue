@@ -29,7 +29,7 @@
     </table>
     <br><br>
     <button v-on:click="goToServices(vehicle.vehId)" style="background: #f5f5dc" >Lisa allolevasse nimekirja hooldusi, mida soovid jälgida</button>
-    <button v-on:click="addServiceLog()" style="background: bisque">Sisesta teostatud hooldus(ed) hoolduste ajalukku</button>
+    <button v-on:click="addServiceLog()" style="background: bisque">Sisesta teostatud hooldus(ed) ajalukku</button>
 
     <br> <br>
 
@@ -59,7 +59,7 @@
         <td bgcolor="#f5f5dc">{{row.pValue}}</td>
         <td>{{row.lastSDate}}</td>
         <td>{{row.lastSOdo}}</td>
-        <td>{{row.nextSDate}}</td>
+        <td >{{row.nextSDate}}</td>
         <td>{{row.nextSOdo}}</td>
         <td bgcolor="#ffe4c4"><input type="date" v-model="row.serviceDate" style="background: bisque" ></td>
         <td bgcolor="#ffe4c4"><input type="number" v-model="row.serviceOdo" style="background: bisque"></td>
@@ -67,9 +67,7 @@
       </tr>
     </table>
     <br><br>
-    <button v-on:click="myVehicles()">Minu sõidukid</button>
     <button v-on:click="toServiceLog(vehicle.vehId)">Sõiduki hoolduste ajalugu</button>
-    <button v-on:click="logOut()">Logi välja</button>
   </div>
 </template>
 
@@ -116,16 +114,9 @@ let deleteRow = function (index){
       .then(alert("Sõiduk kustutatud"))
       .then(this.vehicleList.splice(index, 1))
 }
-let myVehicles = function (){
-  this.$router.push({path: "/Profilepage"})
-}
+
 let toServiceLog = function (vehId){
   this.$router.push({ name: 'Ajalugu', params: { vehId: vehId  }  })
-}
-let logOut = function () {
-  localStorage.removeItem('user-token')
-  this.$router.push({path: '/'})
-  location.reload()
 }
 
 export default {
@@ -136,9 +127,7 @@ export default {
     updateOdo:updateOdo,
     addServiceLog,
     goToServices,
-    myVehicles,
-    toServiceLog,
-    logOut
+    toServiceLog
   },
   data: function (){      //Data on ka Vue enda sisene funtsioon
     return {

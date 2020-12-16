@@ -51,7 +51,6 @@
         <td><button v-on:click="addVehicle()">Lisa sõiduk</button></td>
       </tr>
     </table>
-    <p><button  v-on:click="logout()" > Logi välja </button></p>
   </div>
 </template>
 
@@ -101,11 +100,6 @@ let deleteRow = function (index){
   this.$http.put(url)
       .then(this.vehicleList.splice(index, 1))
 }
-let logout = function (){
-  localStorage.removeItem('user-token')
-  this.$router.push({path: '/'})
-  location.reload()
-}
 
 export default {
   methods: {
@@ -115,8 +109,7 @@ export default {
     addVehicle:addVehicle,
     goToDashboard:goToDashboard,
     goToServices:goToServices,
-    goToHistory:goToHistory,
-    logout
+    goToHistory:goToHistory
   },
   data: function (){      //Data on ka Vue enda sisene funtsioon
     return {

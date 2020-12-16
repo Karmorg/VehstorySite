@@ -22,10 +22,10 @@
       </tr>
     </table>
     <br>
-    <button v-on:click="test2()">salvesta ja mine töölauale</button>
+    <button v-on:click="test2()">Salvesta ja mine töölauale</button>
     <br><br>
     <table border="1" align="center">
-      <caption>Sõiduki töölaual nähtavate hoolduste valik ning välpade määramine</caption>
+      <caption>Sõiduki töölaual hoolduse kuvamiseks määra välba ühik ja soovi korral väärtus, märkus</caption>
       <tr>
         <th width="30"></th>
         <th hidden width="30">ID</th>
@@ -34,7 +34,7 @@
         <th>Välba ühik</th>
         <th>Välba väärtus</th>
         <th>Märkus</th>
-                <th>Valitud/staatus</th>
+                <th>Valitud</th>
 
 
       </tr>
@@ -43,7 +43,7 @@
         <td hidden>{{ row.id }}</td>
         <td hidden>{{ row.vehicleId }}</td>
         <td>{{ row.serviceName }}</td>
-        <td><span hidden>{{ row.pUnit }}</span><select v-model="row.pUnit">
+        <td><span hidden>{{ row.pUnit }}</span><select v-model="row.pUnit" v-on:change="makeActive(index)">
           <option>km</option>
           <option>aasta</option>
           <option>kontrollida</option>
@@ -56,10 +56,8 @@
       </tr>
     </table>
     <br><br>
-    <button v-on:click="myVehicles()">Minu sõidukid</button>
     <button v-on:click="toServiceLog()">Sõiduki hoolduste ajalugu</button>
-    <button v-on:click="logOut()">Logi välja</button>
-    <br>
+    <br><br>
     <img alt="Vue logo" src="../assets/logo.png">
 
   </div>
@@ -89,16 +87,12 @@ let test2 = function () {
       this.$router.push({ name: 'Dashboard', params: { vehId: this.$route.params.vehId } })
   })
 }
-let myVehicles = function (){
-  this.$router.push({path: "/Profilepage"})
+let makeActive = function (index){
+  this.resultList[index].active = true
 }
+
 let toServiceLog = function (){
   this.$router.push({ name: 'Ajalugu', params: { vehId: this.$route.params.vehId }  })
-}
-let logOut = function () {
-  localStorage.removeItem('user-token')
-  this.$router.push({path: '/'})
-  location.reload()
 }
 
 export default {
@@ -106,9 +100,8 @@ export default {
     getData: getData,
     test2: test2,
     getOneVehicle:getOneVehicle,
-    myVehicles,
-    toServiceLog,
-    logOut
+    makeActive,
+    toServiceLog
   },
   data: function () {
     return {

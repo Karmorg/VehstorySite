@@ -45,6 +45,7 @@ let login = function () {
         localStorage.setItem('user-token', token)
         this.$http.defaults.headers.common['Authorization'] = "Bearer " + token
         this.$router.push({path: "Profilepage"})
+        location.reload()
       }).catch(error => {
     if (error.response.status == 400) {
       alert(error.response.data.message)

@@ -1,14 +1,24 @@
 <template >
   <div id="app">
     <div id="nav">
-<!--      <router-link v-if="token" to="/Profilepage">Minu sõidukid</router-link>-->
+      <router-link v-if="token" to="/Profilepage">Minu sõidukid</router-link>   .
+      <button v-if="token" v-on:click="logOut()" >Logi välja</button>
     </div>
     <router-view/>
   </div>
 </template>
 
 <script>
+let logOut = function (){
+  localStorage.removeItem('user-token')
+  this.$router.push({path: '/'})
+  location.reload()
+}
+
 export default {
+  methods:{
+    logOut
+  },
   data(){
     return {
       token: ''
