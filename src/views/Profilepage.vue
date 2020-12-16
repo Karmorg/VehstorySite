@@ -10,6 +10,7 @@
     <h1>Minu sõidukid</h1>
 
     <table border="1" align="center">
+      <caption>Sõiduki lisamiseks peavad kõik väljad täidetud olema</caption>
       <tr>
         <th hidden>Id</th>
         <th hidden>VehId</th>
@@ -32,8 +33,7 @@
         <td>{{row.year}}</td>
         <td>{{row.fuel}}</td>
         <td>{{row.kW}}</td>
-        <td><input size="5" maxlength="9" v-model="row.odo" ></td>
-        <td><button v-on:click="updateOdo(index)" > Uuenda läbisõitu </button></td>
+        <td>{{row.odo}}</td>
         <td><button v-on:click="goToServices(row.vehId)" > Hoolduste valik </button></td>
         <td><button v-on:click="goToDashboard(row.vehId)" > Töölauale </button></td>
         <td><button v-on:click="goToHistory(row.vehId)" > Ajalugu </button></td>
@@ -69,18 +69,6 @@ let addVehicle = function (){
           alert("Sõiduk on lisatud. Alusta hoolduste valikuga.")
           this.getMyVehicles()
           this.vehicle = {}})
-      // .then(this.$router.push({ name: 'TeenusteValimine', params: { vehId: vehId  }  }))
-  // .then(this.$router.push({ path: 'Profilepage' }))
-}
-
-let updateOdo = function (index){
-  let url = this.$host + "/client/updateOdo";
-  let body = {
-    vehId: this.vehicleList[index].vehId,
-    newOdoValue: this.vehicleList[index].odo
-  }
-  this.$http.put(url, body)
-      .then(alert("Uuendatud"))
 }
 
 let goToDashboard = function (vehId){
@@ -105,7 +93,6 @@ export default {
   methods: {
     getMyVehicles:getMyVehicles,
     deleteRow:deleteRow,
-    updateOdo:updateOdo,
     addVehicle:addVehicle,
     goToDashboard:goToDashboard,
     goToServices:goToServices,

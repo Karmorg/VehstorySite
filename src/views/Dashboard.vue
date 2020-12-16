@@ -19,12 +19,16 @@
         <th>Tootja</th>
         <th>Mudel</th>
         <th>RegNr</th>
+        <th>Läbisõit</th>
+        <th>Uuenda</th>
       </tr>
       <tr v-for="(row, index) in resultList1">
         <td hidden>{{row.id}}</td>
         <td>{{row.manufacturer}}</td>
         <td>{{row.model}}</td>
         <td>{{row.regNo}}</td>
+        <td><input type="number" size="5" maxlength="9" placeholder="läbisõit" v-model="row.odo"></td>
+        <td><button v-on:click="updateOdo(index)" > läbisõitu </button></td>
       </tr>
     </table>
     <br><br>
@@ -85,23 +89,21 @@ let getVehicleSelectedServices = function (vehicleId){
       .then(response => this.vehicleSelectedServiceList = response.data);
 }
 
+let updateOdo = function (index){
+  let url = this.$host + "/client/updateOdo";
+  let body = {
+    vehId: this.vehicle.vehId,
+    newOdoValue: this.resultList1[index].odo
+  }
+  this.$http.put(url, body)
+      .then(alert("Uuendatud"))
+}
+
 let addServiceLog = function (){
   let url = this.$host + "/client/addServiceLog"
   this.$http.post(url, this.vehicleSelectedServiceList)
     .then(response =>this.getVehicleSelectedServices(this.vehicle.vehId));
 
-}
-
-let updateOdo = function (index) {
-  let url = this.$host + "/client/updateOdo";
-
-  let body = {
-    vehId: this.vehicleSelectedServiceList[index].vehId,
-    newOdo: this.vehicleSelectedServiceList[index].odo
-
-  }
-  this.$http.put(url, body)
-      .then(alert("uuendatud"))
 }
 
 let goToServices = function (vehId){
@@ -123,8 +125,8 @@ export default {
   methods: {
     getVehicleSelectedServices:getVehicleSelectedServices,
     getOneVehicle: getOneVehicle,
+    updateOdo,
     deleteRow:deleteRow,
-    updateOdo:updateOdo,
     addServiceLog,
     goToServices,
     toServiceLog
